@@ -1,0 +1,67 @@
+.home-page {
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+}
+
+.row1, .row2 {
+    padding: 57px 120px;
+    display: flex;
+    gap: 20px;
+    justify-content: space-between;
+    max-height: 500px;
+}
+
+
+.appartment-img {
+    max-width: 30rem;
+    border-radius: 5px;
+    height: auto;
+    display: block;
+}
+
+.home-content1, .home-content2 {
+    display: flex;
+    flex-direction: column;
+    width: 600px;
+    font-size: 22px;
+    padding: 20px 50px;
+    text-align: justify;
+    line-height: 150%;
+}
+
+.action-bar {
+    background-color: #ebd6a2;    ;
+    padding: 40px 0;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;   
+    gap: 100px; 
+    border-top: solid 2px #9e7d2b;
+    border-bottom: solid 2px #9e7d2b;
+}
+
+.action-button {
+    height: 60px;
+    width: 180px;
+    font-size: 22px;
+    border: none;
+    border-radius: 8px;
+    background-color: #021e4f;
+    color: white;
+    cursor: pointer;
+}
+
+.action-button:active {
+    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
+}
+
+.action-button:hover {
+    color: grey;
+}
+
+
+

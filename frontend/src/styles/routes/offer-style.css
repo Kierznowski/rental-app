@@ -1,0 +1,33 @@
+.offerContainer {
+    height: 100vh;
+    padding: 50px;
+    display: flex;
+    flex-direction: column;
+    margin: 0 auto;
+    width: 100vw;
+}
+
+.title {
+    padding: 15px;
+    font-size: 26px;
+    font-weight: 700;
+    margin-top: 50px;
+}
+
+.price {
+    padding: 15px;
+}
+
+.address {
+    padding: 15px;
+}
+
+.additionalInfo {
+    display: flex;
+    padding: 15px;
+}
+
+.appartmentImage {
+    width: 800px;
+    margin: 0 auto;
+}
