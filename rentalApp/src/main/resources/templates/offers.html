@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pl"
+      xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Hello friend</title>
+    <link rel="stylesheet" th:href="@{/styles/style.css}"/>
+</head>
+
+<body>
+<header>
+    <div id="logo">
+        <h1>CLEARENT</h1>
+    </div>
+    <nav>
+        <a th:href="@{/}">STRONA GŁÓWNA</a>
+        <a th:href="@{/offers}">PRZEGLĄDAJ OFERTY</a>
+        <a th:href="@{/add-offer}">DODAJ OFERTĘ</a>
+        <a th:href="@{/login}">ZALOGUJ</a>
+        <a th:href="@{/contact}">PROFIL</a>
+    </nav>
+    <div style="clear: both;"></div>
+</header>
+<div class="container">
+    This is content
+</div>
+<footer>
+    Kierznowski &copy; 2024
+</footer>
+</body>
+</html>
