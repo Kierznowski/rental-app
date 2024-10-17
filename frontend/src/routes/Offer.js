@@ -8,7 +8,7 @@ export default function Offer() {
     const [offerData, setOfferData] = React.useState({}); 
 
     React.useEffect(() => {
-        fetch(`http://localhost:8080/api/offers/${id}`)
+        fetch(`http://localhost:9090/bff/offers/${id}`)
             .then(res => res.json())
             .then(data => setOfferData(data))
             .catch(error => console.log('Error during fetching offer data:', error));

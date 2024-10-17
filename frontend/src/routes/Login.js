@@ -3,63 +3,52 @@ import './../styles/routes/login-style.css'
 
 export default function Login() {
 
-    const [email, setEmail] = React.useState();
-    const [password, setPassword] = React.useState();
+    const [formData, setFormData] = React.useState([]);
 
     function handleSubmit(event) {
         event.preventDefault();
-        loginUser(event.target.email.value, event.target.password.value);
-    }
-
-    function loginUser(email, password) {
-        fetch('http://localhost:8080/login', {
+        fetch('http://localhost:9090/oauth2/authorization/rentalapp-client', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json', 
             },
-            body: JSON.stringify({
-                email: email,
-                password: password,
-            })
+            body: JSON.stringify(formData)
         })
-        .then(res => {
-            if(res.status === 200) {
-                console.log("User logged in");
-            } else {
-                console.log("User not logged in");
+        .then(res => console.log(res))
+        .catch(error => console.log(`Error during logging: ${error}`));
+    }
+
+    function handleChange(event) {
+        const {name, value} = event.target;
+        setFormData(prev => {
+            return {
+                ...prev,
+                [name]: value
             }
-        })
-        .catch(err => {
-            console.error(err);
         })
     }
 
     return (
         <div className="login-page">
-            <div className="login">
-            <h3>Zaloguj się: </h3>
-                <form onSubmit={handleSubmit}>
-                    <input 
-                        type="text" 
-                        placeholder="Adres e-mail"
-                        name="email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)} 
-                    />
-                    <input 
-                        type="password" 
-                        placeholder="Hasło"
-                        name="password"
-                        value={password}
-                        onChange={(e) => setPassword(e.target.value)}    
-                    />
-                    <button>Zaloguj</button>
-                </form>
-            </div>
-            <div className="register">
-
-            </div>REJESTRACJA
+            <form onSubmit={handleSubmit}>
+                Zaloguj się
+                <input 
+                    type="text" 
+                    placeholder="email" 
+                    onChange={handleChange}
+                    value={formData.email}
+                    name='email'
+                />
+                <input 
+                    type="text" 
+                    placeholder="password" 
+                    onChange={handleChange}
+                    value={formData.password}
+                    name='password'
+                />
+                <button>Zaloguj</button>
+            </form>
         </div>
-    )
+    )   
 }

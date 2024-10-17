@@ -1,6 +1,11 @@
 server:
   port: 9090
-
+  servlet:
+    session:
+      cookie:
+        samesite: None
+        secure: false
+        http-only: true
 spring:
   security:
     oauth2:
@@ -11,8 +16,8 @@ spring:
             client-id: rentalapp-client
             client-secret: secret
             authorization-grant-type: authorization_code
-            redirect-uri: "http://127.0.0.1:9090/login/oauth2/code/{registrationId}"
-            scope: addOffers, deleteOffers, openid
+            redirect-uri: http://127.0.0.1:9090/login/oauth2/code/rentalapp-client
+            scope: addOffers,deleteOffers,openid
         provider:
           authServer:
-            issuer-uri: http://127.0.0.1:9000
+            issuer-uri: http://localhost:9000

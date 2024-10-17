@@ -7,7 +7,12 @@ export default function OfferSearch() {
     const [offers, setOffers] = React.useState([]);
 
     React.useEffect(() => {
-        fetch('http://localhost:8080/api/offers?recent')
+        fetch('http://127.0.0.1:9090/bff/offers',
+            {
+                method: 'GET',
+                credentials: 'include',
+            }
+        )
             .then(res => res.json())
             .then(data => {
                 setOffers(data)

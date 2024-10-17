@@ -1,2 +1,8 @@
 server:
   port: 9000
+  servlet:
+    session:
+      cookie:
+        samesite: None
+        secure: false
+        http-only: true

@@ -4,6 +4,7 @@ import com.kierznowski.rentalApp.models.User;
 import com.kierznowski.rentalApp.repositories.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
@@ -37,6 +38,9 @@ import java.util.Set;
 @EnableWebSecurity
 public class SecurityConfig  {
 
+    @Value("${keySetURI}")
+    private String keySetUri;
+
     @Bean
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
@@ -45,14 +49,13 @@ public class SecurityConfig  {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http
+                .oauth2ResourceServer(oauth2 -> oauth2.jwt(j -> j.jwkSetUri(keySetUri)))
                 .authorizeHttpRequests(auth -> auth
                         .requestMatchers(HttpMethod.POST, "/api/offers").hasAuthority("SCOPE_addOffers")
-                        .requestMatchers(HttpMethod.DELETE, "/api/offers/**").hasRole("SCOPE_deleteOffers")
-                        .requestMatchers("/", "/**").permitAll()
-                        .anyRequest().authenticated())
-                .oauth2ResourceServer(oauth2 -> oauth2.jwt(Customizer.withDefaults()))
+                        .requestMatchers(HttpMethod.DELETE, "/api/offers/**").hasAuthority("SCOPE_deleteOffers")
+                        .anyRequest().permitAll())
                 //.cors((cors) -> cors.configurationSource(configurationSource()))
-                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**", "/api/**"))
+                .csrf(csrf -> csrf.disable())
                 .build();
     }
 
@@ -73,16 +76,16 @@ public class SecurityConfig  {
         };
     }
 
-    @Bean
+/*    @Bean
     public CorsConfigurationSource configurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:9090"));
         configuration.setAllowedMethods(Arrays.asList("*"));
         configuration.setAllowedHeaders(Arrays.asList("*"));
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
-    }
+    }*/
 
 
     @Bean

@@ -1,8 +1,16 @@
 server:
   port: 8080
+  servlet:
+    session:
+      cookie:
+        samesite: None
+        secure: false
+        http-only: true
 spring:
   security:
     oauth2:
       resourceserver:
         jwt:
-          jwk-set-uri: http://localhost:9000/oauth2/jwks
+          issuer-uri: http://localhost:9000
+          keySetURI: http://localhost:9000/oauth2/jwks
+keySetURI: http://localhost:9090/oauth2/jwks

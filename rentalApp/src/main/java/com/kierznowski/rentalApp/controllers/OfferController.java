@@ -14,7 +14,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/offers", produces = "application/json")
-@CrossOrigin(origins="http://localhost:3000")
+@CrossOrigin(origins="http://localhost:9090")
 @AllArgsConstructor
 public class OfferController {
 
