@@ -5,31 +5,36 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RestOfferService implements OfferService {
 
-    private RestTemplate restTemplate;
+    private final RestTemplate restTemplate;
+    //public RestOfferService() {};
 
     public RestOfferService(String accessToken) {
         this.restTemplate = new RestTemplate();
         if(accessToken != null) {
-            this.restTemplate.getInterceptors().add(getBearerTokenInterceptor(accessToken));
+            this.restTemplate
+                    .getInterceptors()
+                    .add(getBearerTokenInterceptor(accessToken));
         }
     }
 
     private ClientHttpRequestInterceptor getBearerTokenInterceptor(String accessToken) {
-        ClientHttpRequestInterceptor interceptor = new ClientHttpRequestInterceptor() {
+        return new ClientHttpRequestInterceptor() {
             @Override
             public ClientHttpResponse intercept(HttpRequest request, byte[] body, ClientHttpRequestExecution execution) throws IOException {
                 request.getHeaders().add("Authorization", "Bearer " + accessToken);
                 return execution.execute(request, body);
             }
         };
-        return interceptor;
     }
 
     @Override

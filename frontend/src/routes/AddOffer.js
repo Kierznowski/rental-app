@@ -1,6 +1,6 @@
 import React from 'react';
 import './../styles/routes/addOffer-style.css';
-import { useNavigate } from 'react-router-dom';
+import { redirect, useNavigate } from 'react-router-dom';
 
 export default function AddOffer() {
 
@@ -34,17 +34,20 @@ export default function AddOffer() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:8080/api/offers', {
+        fetch('http://localhost:9090/bff/offers', {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json', 
             },
-            body: JSON.stringify(formData)
+            body: JSON.stringify(formData),
+            credentials: 'include'
         })
         .then(res => {
             if(res.ok) {
                 navigate('/offers')
+            } else {
+                redirect('/login')
             }
         })
         .catch(error => console.log(`Error during adding offer: ${error}`));

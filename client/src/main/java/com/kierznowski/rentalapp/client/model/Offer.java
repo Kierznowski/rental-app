@@ -1,8 +1,6 @@
 package com.kierznowski.rentalapp.client.model;
 
-import lombok.AccessLevel;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
