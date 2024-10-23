@@ -34,7 +34,7 @@ export default function OfferSearch() {
 
     return (
         <div className="offer-page">
-            <div className="Form">TU BĘDZIE WYSZUKIWARKA</div>
+            <div className="Form"></div>
             {offers.length > 0 ? offersList : <p>No offers available :(</p>}
         </div>
     )

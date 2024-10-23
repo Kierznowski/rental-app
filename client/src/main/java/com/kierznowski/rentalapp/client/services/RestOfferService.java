@@ -5,12 +5,9 @@ import org.springframework.http.HttpRequest;
 import org.springframework.http.client.ClientHttpRequestExecution;
 import org.springframework.http.client.ClientHttpRequestInterceptor;
 import org.springframework.http.client.ClientHttpResponse;
-import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.Arrays;
 
 public class RestOfferService implements OfferService {
@@ -45,6 +42,7 @@ public class RestOfferService implements OfferService {
 
     @Override
     public Offer addOffer(Offer offer) {
+
         return restTemplate.postForObject("http://localhost:8080/api/offers", offer, Offer.class);
     }
 }
