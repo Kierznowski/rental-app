@@ -4,13 +4,13 @@ import App from './App';
 import ErrorPage from './routes/ErrorPage';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';  
 
-import OfferSearch from './routes/OfferSearch';
-import AddOffer from './routes/AddOffer';
-import Account from './routes/Account';
-import Login from './routes/Login';
-import Contact from './routes/Contact'; 
-import Home from './routes/Home';
-import Offer from './routes/Offer';
+import OfferSearchPage from './routes/OfferSearchPage';
+import HomePage from './routes/HomePage';
+import AddOfferPage from './routes/AddOfferPage';
+import AccountPage from './routes/AccountPage';
+import LoginPage from './routes/LoginPage';
+import ContactPage from './routes/ContactPage';
+import OfferPage from './routes/OfferPage';
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -22,31 +22,31 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <Home />
+        element: <HomePage />
       },
       {
         path: 'offers',
-        element: <OfferSearch />
+        element: <OfferSearchPage />
       },
       {
         path: 'addOffer',
-        element: <AddOffer />
+        element: <AddOfferPage />
       },
       {
         path: 'account',
-        element: <Account />
+        element: <AccountPage />
       },
       {
         path: 'login',
-        element: <Login />
+        element: <LoginPage />
       },
       {
         path: 'contact',
-        element: <Contact />
+        element: <ContactPage />
       },
       {
         path: 'offers/:id',
-        element: <Offer/>
+        element: <OfferPage />
       }
     ]
   },

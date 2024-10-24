@@ -1,14 +1,16 @@
 .offer-container {
     background-color:  #ebd6a2;
     border: solid 1px #c7b27d;
-    padding: 10px;
-    border-radius: 3px;
-    margin: 15px;
-    margin-left: 50px;
+    border-radius: 4px;
+    box-shadow: 2px 2px 1px 1px #a5a5a5;
+    padding: 20px;
+    margin: 10px 0px;
     display: flex;
     gap: 50px;
     font-size: 14px;
     align-items: center;
+    width: 100%;
+
 }
 
 .description {

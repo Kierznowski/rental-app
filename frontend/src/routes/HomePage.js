@@ -5,7 +5,7 @@ import { Link } from 'react-router-dom';
 import appartment1 from './../assets/images/appartment1.jpg';
 import appartment2 from './../assets/images/appartment2.jpg'
 
-export default function Home() {
+export default function HomePage() {
     return (
         <div className="home-page">
             <div className="row1">

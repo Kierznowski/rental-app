@@ -1,6 +1,5 @@
-import './../styles/components/offerShort-style.css';
+import './../styles/components/offer-short.css';
 import appartment1 from './../assets/images/appartment1.jpg';
-import appartment2 from './../assets/images/appartment2.jpg';
 import { Link } from 'react-router-dom';
 
 

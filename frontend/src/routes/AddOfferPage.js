@@ -2,7 +2,7 @@ import React from 'react';
 import './../styles/routes/addOffer-style.css';
 import { redirect, useNavigate } from 'react-router-dom';
 
-export default function AddOffer() {
+export default function AddOfferPage() {
 
     const [ formData, setFormData ] = React.useState({
         offerName: "",

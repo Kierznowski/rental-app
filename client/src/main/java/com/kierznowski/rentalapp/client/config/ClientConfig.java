@@ -34,7 +34,7 @@ public class ClientConfig {
 
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.GET, "/bff/offers").permitAll()
-                .anyRequest().authenticated());
+                .anyRequest().permitAll());
         http.oauth2Login(Customizer.withDefaults());
         http.oauth2Client(Customizer.withDefaults())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));

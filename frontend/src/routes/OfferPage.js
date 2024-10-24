@@ -3,7 +3,7 @@ import React from 'react';
 import './../styles/routes/offer-style.css';
 import Appartment from './../assets/images/appartment1.jpg';
 
-export default function Offer() {
+export default function OfferPage() {
     const { id } = useParams();
     const [offerData, setOfferData] = React.useState({}); 
 

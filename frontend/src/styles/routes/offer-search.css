@@ -1,5 +1,8 @@
 .offer-page {
+    box-sizing: border-box;
     display: flex;
     flex-direction: column;
+    flex: 0 1 85%;
     min-height: 100vh;
+    margin: 0 auto;
 }
