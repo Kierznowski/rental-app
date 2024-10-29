@@ -1,4 +1,5 @@
-"Aleksandrów Łódzki",
+const cities = 
+["Aleksandrów Łódzki",
 "Alwernia",
 "Andrychów",
 "Annopol",
@@ -774,4 +775,4 @@
 "Żory",
 "Żukowo",
 "Żuromin",
-"Żychlin",
+"Żychlin"]

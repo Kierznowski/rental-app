@@ -1,6 +1,9 @@
 import React from 'react';
 import './../styles/routes/addOffer-style.css';
+import PhotoSlider from '../components/PhotoSlider';
+
 import { redirect, useNavigate } from 'react-router-dom';
+
 
 export default function AddOfferPage() {
 
@@ -20,7 +23,9 @@ export default function AddOfferPage() {
         animals: false 
     });
 
+    
     const navigate = useNavigate();
+    const [errorMessage, setErrorMessage] = React.useState("");
 
     function handleChange(event) {
         const {name, value, type, checked} = event.target;
@@ -34,24 +39,44 @@ export default function AddOfferPage() {
 
     function handleSubmit(event) {
         event.preventDefault();
-        fetch('http://localhost:9090/bff/offers', {
-            method: 'POST',
-            headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json', 
-            },
-            body: JSON.stringify(formData),
-            credentials: 'include'
-        })
-        .then(res => {
-            if(res.ok) {
-                navigate('/offers')
-            } else {
-                redirect('/login')
-            }
-        })
-        .catch(error => console.log(`Error during adding offer: ${error}`));
+        if(validate()) {
+            fetch('http://localhost:9090/bff/offers', {
+                method: 'POST',
+                headers: {
+                    'Accept': 'application/json',
+                    'Content-Type': 'application/json', 
+                },
+                body: JSON.stringify(formData),
+                credentials: 'include'
+            })
+            .then(res => {
+                if(res.ok) {
+                    navigate('/offers')
+                } else {
+                    redirect('/login')
+                }
+            })
+            .catch(error => console.log(`Error during adding offer: ${error}`));
+        }
     }
+
+    function validate() {
+        if(formData.offerName === "") {
+            setErrorMessage(prev => prev + "Wprowadź tytuł oferty.");
+            console.log(errorMessage);
+            return false;
+        }
+        if(formData.city === "") {
+            setErrorMessage(prev => prev + "Wprowadź miasto.")
+            console.log(errorMessage);
+            return false;
+        }
+        if(formData.street === "") {
+        }
+        return true;
+    }
+
+    
 
     return (
         <div className="addOffer-container">
@@ -157,9 +182,9 @@ export default function AddOfferPage() {
                     name="animals"
                     onChange={handleChange}
                 />
-
                 <button>Dodaj ogłoszenie</button>
             </form>
+            <PhotoSlider />
         </div>
     )
 }

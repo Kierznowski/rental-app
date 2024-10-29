@@ -20,6 +20,7 @@ public class Offer {
     private Long id;
     private Long userId;
     private Date createdAt = new Date();
+
     private String offerName;
     private String city;
     private String district;

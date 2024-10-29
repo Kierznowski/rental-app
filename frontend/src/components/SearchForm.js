@@ -35,21 +35,27 @@ export default function SearchForm({ onSearch }) {
     }
 
     function handleSubmit(event) {
-        event.preventDefault();
-        fetch('http://localhost:9090/bff/search', {
-            method: 'POST',
-            headers: {
-                'Accept' : 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(searchData),
-            credentials: 'include'
-        })
-        .then(res => res.json())
-        .then(data => {
-            onSearch(data);
-        })
-        .catch(err => console.log(`Error during searching offer: ${err}`));
+        if(validate) {
+            event.preventDefault();
+            fetch('http://localhost:9090/bff/search', {
+                method: 'POST',
+                headers: {
+                    'Accept' : 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(searchData),
+                credentials: 'include'
+            })
+            .then(res => res.json())
+            .then(data => {
+                onSearch(data);
+            })
+            .catch(err => console.log(`Error during searching offer: ${err}`));
+        }
+    }
+
+    function validate() {
+        return true;
     }
 
     return (

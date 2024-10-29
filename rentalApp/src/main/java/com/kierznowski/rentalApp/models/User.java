@@ -6,11 +6,14 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
 
 @Entity(name="User_data")
 @Data
+@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
@@ -29,6 +32,8 @@ public class User implements UserDetails {
     private final String userCity;
     private final String userStreet;
     private final String userZip;
+    @OneToMany
+    private List<Offer> userOffers = new ArrayList<>();
 
 
     @Override

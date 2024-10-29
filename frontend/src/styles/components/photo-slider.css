@@ -1,0 +1,75 @@
+
+.offer-photos-form {
+    margin-top: 20px;
+    display: flex;
+    flex: 1 1 65%;
+    min-width: 400px;
+    flex-direction: column;
+    align-items: center;
+}
+
+
+
+.add-photo-button {
+    width: 200px;
+    border: none;
+}
+
+.photo-display {
+    margin-top: 20px;
+    position: relative;
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    justify-content: space-between;
+    background-color: #fce1ac;
+    height: auto;
+    min-height: 500px;
+    border-radius: 4px;
+}
+
+.photo-display p {
+    margin: 0 auto;
+    margin-top: 240px;
+}
+
+.photo-display img {
+    width: 100%;
+    height: 600px;
+    object-fit: contain;
+    display: block;
+    background-color: black;
+}
+
+.prev-button, .next-button {
+    font-size: 40px;
+    color: #aa986c;
+    position: absolute;
+    height: 100%;
+    width: 10%;
+    background-color: rgb(165, 165, 165, 0.1);
+}
+
+.photo-display button:hover {
+    background-color: rgb(165, 165, 165, 0.2);
+}
+
+.prev-button {
+    left: 0px;
+    border-radius: 4px 0px 0px 4px;
+}
+
+.next-button {
+    right: 0px;
+    border-radius: 0px 4px 4px 0px;
+}
+
+.delete-photo {
+    background-color: darkred;
+    width: 30px;
+    height: 30px;
+    position: absolute;
+    right: 90px;
+    top: 15px
+}
+

@@ -36,7 +36,7 @@ public class RequestConverter {
     public static String variableRefiner(String variable) {
         String newVariable =  variable.replace("min", "")
                 .replace("max", "")
-                .replace("price", "fullPrice");
+                .replace("Price", "fullPrice");
         return newVariable.substring(0, 1).toLowerCase() + newVariable.substring(1);
     }
 }
