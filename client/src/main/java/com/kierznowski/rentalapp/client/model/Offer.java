@@ -6,6 +6,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
+import java.util.List;
 
 @Data
 @RequiredArgsConstructor
@@ -31,4 +32,5 @@ public class Offer {
     private boolean annexKitchen;
     private boolean elevator;
     private boolean animals;
+    private List<Long> imageIds;
 }

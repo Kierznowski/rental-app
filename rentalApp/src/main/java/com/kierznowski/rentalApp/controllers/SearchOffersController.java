@@ -23,7 +23,6 @@ import java.util.List;
 @AllArgsConstructor
 public class SearchOffersController {
 
-    @Autowired
     private OfferService offerService;
 
     @PostMapping

@@ -2,7 +2,7 @@ package com.kierznowski.rentalApp.controllers;
 
 import com.kierznowski.rentalApp.models.Image;
 import com.kierznowski.rentalApp.repositories.ImageDbRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.core.io.Resource;
 import org.springframework.http.HttpStatus;
@@ -12,9 +12,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.server.ResponseStatusException;
 
 @RestController
+@AllArgsConstructor
 public class ImageController {
 
-    @Autowired
     ImageDbRepository imageDbRepository;
 
     @PostMapping("/image")

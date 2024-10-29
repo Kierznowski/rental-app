@@ -21,7 +21,6 @@ export default function SearchForm({ onSearch }) {
         elevator: "",
     });
 
-
     const [more, setMore] = React.useState(false);
 
     function handleChange(event) {

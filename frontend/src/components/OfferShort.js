@@ -1,13 +1,38 @@
 import './../styles/components/offer-short.css';
-import appartment1 from './../assets/images/appartment1.jpg';
 import { Link } from 'react-router-dom';
+import {useState, useEffect } from 'react';
 
 
 export default function OfferShort(props) {
+
+    const [imageSrc, setImageSrc] = useState("");
+
+    useEffect(() => {
+        const fetchImage = async () => {
+            try {
+                const res = await fetch(`http://localhost:8080/file-system/image/${props.imageId}`, {
+                    method: 'GET',
+                    credentials: 'include'
+                });
+
+                if(res.ok) {
+                    const imageBlob = await res.blob();
+                    const imageUrl = URL.createObjectURL(imageBlob);
+                    setImageSrc(imageUrl);
+                } else {
+                    console.error(`Error: ${res.status}`);
+                }
+            } catch (error) {
+                console.error(`Error during fetching offer image: ${error}`);
+            }
+        };
+        fetchImage();
+    }, [props.imageId]);
+    
     return (
         <div className='content'>
         <div className='offer-container'>
-            <Link to={`./../offers/${props.id}`}><img src={appartment1} alt='appartment' className='offerImage'/></Link>
+            <Link to={`./../offers/${props.id}`}><img src={imageSrc} alt='appartment' className='offerImage'/></Link>
             <div className='description'>
                 <div className='title-price'>
                     <Link to={`./../offers/${props.id}`} ><div className="title">{props.title}</div></Link>

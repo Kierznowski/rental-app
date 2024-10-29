@@ -1,6 +1,7 @@
 import React from 'react';
 import './../styles/routes/addOffer-style.css';
-import PhotoSlider from '../components/PhotoSlider';
+import AddOfferForm from '../components/AddOfferForm';
+import AddOfferPhotos from '../components/AddOfferPhotos';
 
 export default function AddOfferPage() {
 
@@ -19,15 +20,9 @@ export default function AddOfferPage() {
         elevator: false,
         animals: false 
     });
-
     const [files, setFiles] = React.useState([]);
 
-    function handleFilesChange(newFiles) {
-        setFiles(newFiles);
-    }
-
-
-    function handleChange(event) {
+    function handleFormChange(event) {
         const {name, value, type, checked} = event.target;
         setFormData(prev => {
             return {
@@ -35,6 +30,10 @@ export default function AddOfferPage() {
                 [name]: type === "checkbox" ? checked : value
             }
         })
+    }
+
+    function handleImagesChange(newFiles) {
+        setFiles(newFiles);
     }
 
     async function handleSubmit(event) {
@@ -52,10 +51,7 @@ export default function AddOfferPage() {
             if(res.ok) {
                 const data = await res.json();
                 if(files.length > 0) {
-                    const uploadSuccess = await uploadImages(data);
-                    if(!uploadSuccess) {
-                        console.log("BŁąd przesyłania obrazów");
-                    }
+                    await uploadImages(data);
                 }
             }
         } catch (error) {
@@ -65,6 +61,7 @@ export default function AddOfferPage() {
 
     async function uploadImages(offerId) {
         const formData = new FormData();
+
         files.forEach((file) => {
             formData.append(`multipartImage`, file);
         });
@@ -76,117 +73,19 @@ export default function AddOfferPage() {
             body: formData,
             credentials: 'include'
         });
+
         return res.ok;
     }
 
 
     return (
         <div className="addOffer-container">
-            <form onSubmit={handleSubmit}>
-                Wprowadź tytuł ogłoszenia:
-                <input 
-                    type="text" 
-                    placeholder="Tytuł ogłoszenia" 
-                    onChange={handleChange}
-                    value={formData.offerName}
-                    name='offerName'
-                />
-                Podaj adres mieszkania:
-                <input 
-                    type="text" 
-                    placeholder="Miasto" 
-                    onChange={handleChange}
-                    value={formData.city}
-                    name='city'
-                />
-                <input 
-                    type="text"
-                    placeholder="Ulica" 
-                    onChange={handleChange}
-                    value={formData.street}
-                    name='street'
-                />
-                <input 
-                    type="text" 
-                    placeholder="Dzielnica" 
-                    onChange={handleChange}
-                    value={formData.district}
-                    name='district'
-                />
-                <input 
-                    type="text"
-                    placeholder="Kod pocztowy" 
-                    onChange={handleChange}
-                    value={formData.zip}
-                    name='zip'
-                />
-                Podaj dodatkowe informacje o mieszkaniu:
-                <input 
-                    type="number" 
-                    placeholder="Powierzchnia" 
-                    onChange={handleChange}
-                    value={formData.area}
-                    name='area'
-                />
-                <input 
-                    type="number" 
-                    placeholder="Ilość pokoi" 
-                    onChange={handleChange}
-                    value={formData.roomsNumber}
-                    name='roomsNumber'
-                />
-                <input 
-                    type="number" 
-                    placeholder="Piętro" 
-                    onChange={handleChange}
-                    value={formData.estateLevel}
-                    name='estateLevel' 
-                />
-                <input 
-                    type="number" 
-                    placeholder="Rok budowy" 
-                    onChange={handleChange}
-                    value={formData.buildingYear}
-                    name='buildingYear'
-                />
-                <label htmlFor="garage">Miejsce postojowe / garaż: </label>
-                <input 
-                    type='checkbox'
-                    id='garage'
-                    checked={formData.garage}
-                    name="garage"
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="annexKitchen">Aneks kuchenny: </label>
-                <input 
-                    type='checkbox'
-                    id='annexKitchen'
-                    checked={formData.annexKitchen}
-                    name="annexKitchen"
-                    onChange={handleChange}
-                />
-
-                <label htmlFor="elevator">Winda: </label>
-                <input 
-                    type='checkbox'
-                    id='elevator'
-                    checked={formData.elevator}
-                    name="elevator"
-                    onChange={handleChange}
-                />
-                
-                <label htmlFor="animals">Zwierzęta dozwolone: </label>
-                <input 
-                    type='checkbox'
-                    id='animals'
-                    checked={formData.animals}
-                    name="animals"
-                    onChange={handleChange}
-                />
-                <button>Dodaj ogłoszenie</button>
-            </form>
-            <PhotoSlider onFilesChange={handleFilesChange} />
+            <AddOfferForm 
+                formData={formData}
+                onFormChange={handleFormChange} 
+                onFormSubmit={handleSubmit}    
+            />
+            <AddOfferPhotos onImagesChange={handleImagesChange} />
         </div>
     )
 }

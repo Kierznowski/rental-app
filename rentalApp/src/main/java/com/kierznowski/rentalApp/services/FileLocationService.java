@@ -3,18 +3,17 @@ package com.kierznowski.rentalApp.services;
 import com.kierznowski.rentalApp.models.Image;
 import com.kierznowski.rentalApp.repositories.FileSystemRepository;
 import com.kierznowski.rentalApp.repositories.ImageDbRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.AllArgsConstructor;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
 @Service
+@AllArgsConstructor
 public class FileLocationService {
 
-    @Autowired
     FileSystemRepository fileSystemRepository;
-    @Autowired
     ImageDbRepository imageDbRepository;
 
     public Long save(byte[] bytes, String imageName) throws Exception {

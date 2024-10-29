@@ -1,7 +1,7 @@
 import React from "react";
-import '../styles/components/photo-slider.css';
+import '../styles/components/add-offer-photos.css';
 
-export default function PhotoSlider( {onFilesChange}) {
+export default function AddOfferPhotos( {onImagesChange}) {
 
     const [files, setFiles] = React.useState([]);
     const [photoIndex, setPhotoIndex] = React.useState(0);
@@ -12,23 +12,15 @@ export default function PhotoSlider( {onFilesChange}) {
         setFiles(prevFiles => [...prevFiles, ...newFiles]);
         setNumOfPhotos(prev => prev + 1);
         setPhotoIndex(0);
-        onFilesChange([...files, ...newFiles]);
+        onImagesChange([...files, ...newFiles]);
     }
 
     function previousPhoto() {
-        if(photoIndex === 0) {
-            setPhotoIndex(numOfPhotos - 1);
-        } else {
-            setPhotoIndex(photoIndex - 1);
-        }
+        photoIndex === 0 ? setPhotoIndex(numOfPhotos - 1) : setPhotoIndex(photoIndex - 1);
     }
 
     function nextPhoto() {
-        if(photoIndex === numOfPhotos - 1) {
-            setPhotoIndex(0);
-        } else {
-            setPhotoIndex(photoIndex + 1);
-        }
+        photoIndex === numOfPhotos - 1 ? setPhotoIndex(0) : setPhotoIndex(photoIndex + 1); 
     }
 
     function deletePhoto() {
@@ -38,7 +30,7 @@ export default function PhotoSlider( {onFilesChange}) {
             if(photoIndex >= newFiles.length) {
                 setPhotoIndex(Math.max(newFiles.length - 1, 0));
             }
-            onFilesChange(newFiles);
+            onImagesChange(newFiles);
             setNumOfPhotos(prev => Math.max(prev - 1, 0));
             return newFiles;
         });
@@ -51,13 +43,14 @@ export default function PhotoSlider( {onFilesChange}) {
                 <div className='photo-display'>
                     <button onClick={previousPhoto} className="prev-button">⇐</button>
                     {numOfPhotos > 0 ? <>
-                    <img 
-                        key={photoIndex} 
-                        src={URL.createObjectURL(files[photoIndex])} 
-                        alt={`appartment-photo-${photoIndex}`}   
-                    />
-                    <button className='delete-photo' onClick={deletePhoto}>&#x2715;</button>
-                    </> : <p>Brak zdjęć</p>}
+                        <img 
+                            key={photoIndex} 
+                            src={URL.createObjectURL(files[photoIndex])} 
+                            alt={`appartment-photo-${photoIndex}`}   
+                        />
+                        <button className='delete-photo' onClick={deletePhoto}>&#x2715;</button>
+                        </> 
+                        : <p>Brak zdjęć</p>}
                     <button onClick={nextPhoto} className="next-button">⇒</button>
                 </div>
 

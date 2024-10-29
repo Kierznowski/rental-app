@@ -11,6 +11,7 @@ export default function SearchedOffers({ offers }) {
             area={offer.area}
             city={offer.city}
             street={offer.street}
+            imageId={offer.imageIds[0]}
         />
     ));
 

@@ -6,6 +6,7 @@ import Appartment from './../assets/images/appartment1.jpg';
 export default function OfferPage() {
     const { id } = useParams();
     const [offerData, setOfferData] = React.useState({}); 
+    const [images, setImages] = React.useState([]);
 
     React.useEffect(() => {
         fetch(`http://localhost:9090/bff/offers/${id}`)
