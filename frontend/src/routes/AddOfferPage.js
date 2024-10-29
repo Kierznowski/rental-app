@@ -2,9 +2,6 @@ import React from 'react';
 import './../styles/routes/addOffer-style.css';
 import PhotoSlider from '../components/PhotoSlider';
 
-import { redirect, useNavigate } from 'react-router-dom';
-
-
 export default function AddOfferPage() {
 
     const [ formData, setFormData ] = React.useState({
@@ -23,9 +20,12 @@ export default function AddOfferPage() {
         animals: false 
     });
 
-    
-    const navigate = useNavigate();
-    const [errorMessage, setErrorMessage] = React.useState("");
+    const [files, setFiles] = React.useState([]);
+
+    function handleFilesChange(newFiles) {
+        setFiles(newFiles);
+    }
+
 
     function handleChange(event) {
         const {name, value, type, checked} = event.target;
@@ -37,10 +37,10 @@ export default function AddOfferPage() {
         })
     }
 
-    function handleSubmit(event) {
+    async function handleSubmit(event) {
         event.preventDefault();
-        if(validate()) {
-            fetch('http://localhost:9090/bff/offers', {
+        try {   
+            const res = await fetch('http://localhost:9090/bff/offers', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
@@ -49,34 +49,36 @@ export default function AddOfferPage() {
                 body: JSON.stringify(formData),
                 credentials: 'include'
             })
-            .then(res => {
-                if(res.ok) {
-                    navigate('/offers')
-                } else {
-                    redirect('/login')
+            if(res.ok) {
+                const data = await res.json();
+                if(files.length > 0) {
+                    const uploadSuccess = await uploadImages(data);
+                    if(!uploadSuccess) {
+                        console.log("BŁąd przesyłania obrazów");
+                    }
                 }
-            })
-            .catch(error => console.log(`Error during adding offer: ${error}`));
+            }
+        } catch (error) {
+            console.error(`Error during adding offer: ${error}`);
         }
     }
 
-    function validate() {
-        if(formData.offerName === "") {
-            setErrorMessage(prev => prev + "Wprowadź tytuł oferty.");
-            console.log(errorMessage);
-            return false;
-        }
-        if(formData.city === "") {
-            setErrorMessage(prev => prev + "Wprowadź miasto.")
-            console.log(errorMessage);
-            return false;
-        }
-        if(formData.street === "") {
-        }
-        return true;
+    async function uploadImages(offerId) {
+        const formData = new FormData();
+        files.forEach((file) => {
+            formData.append(`multipartImage`, file);
+        });
+
+        formData.append('offerId', offerId);
+
+        const res = await fetch(`http://localhost:8080/file-system/image`, {
+            method: 'POST',
+            body: formData,
+            credentials: 'include'
+        });
+        return res.ok;
     }
 
-    
 
     return (
         <div className="addOffer-container">
@@ -184,7 +186,7 @@ export default function AddOfferPage() {
                 />
                 <button>Dodaj ogłoszenie</button>
             </form>
-            <PhotoSlider />
+            <PhotoSlider onFilesChange={handleFilesChange} />
         </div>
     )
 }

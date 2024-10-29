@@ -45,7 +45,6 @@ public class RestOfferService implements OfferService {
 
     @Override
     public Offer addOffer(Offer offer) {
-
         return restTemplate.postForObject("http://localhost:8080/api/offers", offer, Offer.class);
     }
 

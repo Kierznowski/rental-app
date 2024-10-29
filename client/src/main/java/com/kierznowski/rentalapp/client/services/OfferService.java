@@ -3,6 +3,7 @@ package com.kierznowski.rentalapp.client.services;
 import com.kierznowski.rentalapp.client.model.Offer;
 import com.kierznowski.rentalapp.client.searching.APIResponse;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Map;
 

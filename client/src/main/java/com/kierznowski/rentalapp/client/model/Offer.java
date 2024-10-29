@@ -2,6 +2,7 @@ package com.kierznowski.rentalapp.client.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;

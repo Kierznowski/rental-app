@@ -3,12 +3,14 @@ package com.kierznowski.rentalapp.client.controllers;
 import com.kierznowski.rentalapp.client.model.Offer;
 import com.kierznowski.rentalapp.client.services.OfferService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 
 @RestController
 @RequestMapping("/bff/offers")
 @RequiredArgsConstructor
+@CrossOrigin("http://localhost:3000")
 public class OfferController {
 
     private final OfferService offerService;
@@ -19,7 +21,8 @@ public class OfferController {
     }
 
     @PostMapping
-    public void addOffer(@RequestBody Offer offer) {
-        offerService.addOffer(offer);
+    public Long addOffer(@RequestBody Offer offer) throws Exception {
+        Offer addedOffer = offerService.addOffer(offer);
+        return addedOffer.getId();
     }
 }

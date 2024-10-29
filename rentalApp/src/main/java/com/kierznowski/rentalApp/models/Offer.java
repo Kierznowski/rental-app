@@ -5,7 +5,9 @@ import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Data
@@ -37,4 +39,7 @@ public class Offer {
     private boolean annexKitchen;
     private boolean elevator;
     private boolean animals;
+
+    @ElementCollection
+    private List<Long> imageIds = new ArrayList<>();
 }
