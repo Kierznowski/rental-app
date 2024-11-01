@@ -5,44 +5,49 @@ export default function AddOfferPhotos( {onImagesChange}) {
 
     const [files, setFiles] = React.useState([]);
     const [photoIndex, setPhotoIndex] = React.useState(0);
-    const [numOfPhotos, setNumOfPhotos] = React.useState(0);
 
     function handleUploadingPhoto(e) {
         const newFiles = Array.from(e.target.files);
-        setFiles(prevFiles => [...prevFiles, ...newFiles]);
-        setNumOfPhotos(prev => prev + 1);
-        setPhotoIndex(0);
-        onImagesChange([...files, ...newFiles]);
+        
+        setFiles((prevFiles) => {
+            const updatedFiles = [...prevFiles, ...newFiles];
+            setPhotoIndex(updatedFiles.length - 1);
+            onImagesChange(updatedFiles);
+            return updatedFiles;
+        });
     }
 
     function previousPhoto() {
-        photoIndex === 0 ? setPhotoIndex(numOfPhotos - 1) : setPhotoIndex(photoIndex - 1);
+        setPhotoIndex((prevIndex) => prevIndex === 0 ? files.length - 1 : prevIndex - 1);
     }
 
     function nextPhoto() {
-        photoIndex === numOfPhotos - 1 ? setPhotoIndex(0) : setPhotoIndex(photoIndex + 1); 
+        setPhotoIndex((prevIndex) => prevIndex === files.length - 1  ? 0 : prevIndex + 1);
     }
 
     function deletePhoto() {
-        setFiles(prevFiles => {
-            const newFiles = prevFiles.filter((_, index) => index !== photoIndex);
+        setFiles((prevFiles) => {
+            const updatedFiles = prevFiles.filter((_, index) => index !== photoIndex);
             
-            if(photoIndex >= newFiles.length) {
-                setPhotoIndex(Math.max(newFiles.length - 1, 0));
-            }
-            onImagesChange(newFiles);
-            setNumOfPhotos(prev => Math.max(prev - 1, 0));
-            return newFiles;
+            setPhotoIndex((prevIndex) => Math.max(updatedFiles.length - 1, 0));
+            onImagesChange(updatedFiles);
+            
+            return updatedFiles;
         });
     }
     
     return (
             <div className='offer-photos-form'>
                 <label>Dodaj zdjęcia:</label>
-                <input className='add-photo-button' type='file' onChange={handleUploadingPhoto} multiple />
+                <input 
+                    className='add-photo-button' 
+                    type='file' 
+                    onChange={handleUploadingPhoto} 
+                    multiple     
+                />
                 <div className='photo-display'>
                     <button onClick={previousPhoto} className="prev-button">⇐</button>
-                    {numOfPhotos > 0 ? <>
+                    {files.length > 0 ? <>
                         <img 
                             key={photoIndex} 
                             src={URL.createObjectURL(files[photoIndex])} 
@@ -52,6 +57,15 @@ export default function AddOfferPhotos( {onImagesChange}) {
                         </> 
                         : <p>Brak zdjęć</p>}
                     <button onClick={nextPhoto} className="next-button">⇒</button>
+                    <div className="circle-indicator">
+                    {files.map((_, index) => (
+                    <span
+                        key={index}
+                        className={`circle ${index === photoIndex ? 'active' : ''}`}
+                        onClick={() => setPhotoIndex(index)}
+                    />
+                    ))}
+            </div>
                 </div>
 
             </div>

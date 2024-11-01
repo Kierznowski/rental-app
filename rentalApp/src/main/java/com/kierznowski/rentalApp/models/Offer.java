@@ -40,5 +40,10 @@ public class Offer {
     private boolean animals;
 
     @ElementCollection
+    @CollectionTable(
+            name = "offer_images",               // Table to store image IDs
+            joinColumns = @JoinColumn(name = "offer_id") // Foreign key in offer_images referencing Offer_data
+    )
+    @Column(name = "image_id")
     private List<Long> imageIds = new ArrayList<>();
 }

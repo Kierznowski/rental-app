@@ -11,6 +11,7 @@ import AccountPage from './routes/AccountPage';
 import LoginPage from './routes/LoginPage';
 import ContactPage from './routes/ContactPage';
 import OfferPage from './routes/OfferPage';
+import RegisterPage from './routes/RegisterPage';
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -47,6 +48,10 @@ const router = createBrowserRouter([
       {
         path: 'offers/:id',
         element: <OfferPage />
+      },
+      {
+        path: 'register',
+        element: <RegisterPage />
       }
     ]
   },

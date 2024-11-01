@@ -36,7 +36,7 @@ export default function SearchForm({ onSearch }) {
     function handleSubmit(event) {
         if(validate) {
             event.preventDefault();
-            fetch('http://localhost:9090/bff/search', {
+            fetch('http://localhost:9090/bff/offers/search', {
                 method: 'POST',
                 headers: {
                     'Accept' : 'application/json',

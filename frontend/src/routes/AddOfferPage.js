@@ -2,8 +2,11 @@ import React from 'react';
 import './../styles/routes/addOffer-style.css';
 import AddOfferForm from '../components/AddOfferForm';
 import AddOfferPhotos from '../components/AddOfferPhotos';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddOfferPage() {
+
+    const navigate = useNavigate();
 
     const [ formData, setFormData ] = React.useState({
         offerName: "",
@@ -53,6 +56,7 @@ export default function AddOfferPage() {
                 if(files.length > 0) {
                     await uploadImages(data);
                 }
+                navigate('/offers');
             }
         } catch (error) {
             console.error(`Error during adding offer: ${error}`);
@@ -67,8 +71,8 @@ export default function AddOfferPage() {
         });
 
         formData.append('offerId', offerId);
-
-        const res = await fetch(`http://localhost:8080/file-system/image`, {
+        console.log(formData);
+        const res = await fetch(`http://localhost:8080/file-system/upload-images`, {
             method: 'POST',
             body: formData,
             credentials: 'include'

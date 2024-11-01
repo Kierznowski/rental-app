@@ -33,8 +33,9 @@
 }
 
 .offerImage {
-    max-width: 300px;
+    width: 300px;
     max-height: 200px;
+    object-fit: contain;
 }
 
 a {

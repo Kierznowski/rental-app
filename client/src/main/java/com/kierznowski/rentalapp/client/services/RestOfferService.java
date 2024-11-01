@@ -51,8 +51,11 @@ public class RestOfferService implements OfferService {
     @Override
     public ResponseEntity<APIResponse> searchOffers(@RequestBody Map<String, Object> data) {
         OfferSearchDTO convertedBody = RequestConverter.convertToOfferSearchDTO(data);
-        ResponseEntity<APIResponse> res =  restTemplate.postForEntity("http://localhost:8080/api/searchOffers", convertedBody,APIResponse.class);
-        System.out.println(res);
-        return res;
+        return  restTemplate.postForEntity("http://localhost:8080/api/searchOffers", convertedBody,APIResponse.class);
+    }
+
+    @Override
+    public ResponseEntity<Offer> getOfferById(Long id) {
+        return restTemplate.getForEntity("http://localhost:8080/api/offers/" + id, Offer.class);
     }
 }
