@@ -2,6 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/routes/register-page.css'
 
 import React from "react";
+import { useFormik } from 'formik';
+import * as Yup from 'yup';
 
 export default function RegisterPage() {
 
@@ -12,21 +14,30 @@ export default function RegisterPage() {
         password: "",
         firstName: "",
         lastName: "",
-        phoneNumber: "",
+        phone: "",
         userCity: "",
         userStreet: "",
         userZip: "",
     })
 
+    function isValid() {
+    //
+    }
+
 
     async function handleSubmit(e) {
         e.preventDefault();
         
+        if(!isValid()) {
+            return;
+        } 
+        
         try {
-            const res = await fetch("http://localhost:9090/bff/register", {
+            const res = await fetch("http://localhost:9090/register", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
+                    'Content-Type': 'application/json'
                 },
                 body: JSON.stringify(formData),
                 credentials: 'include',
@@ -59,8 +70,8 @@ export default function RegisterPage() {
                     type='text'
                     placeholder='adres e-mail'
                     onChange={handleChange}
-                    value={formData.userEmail}
-                    name='userEmail'
+                    value={formData.email}
+                    name='email'
                 />
                 
                 <input
@@ -99,8 +110,8 @@ export default function RegisterPage() {
                     type='text'
                     placeholder="numer telefonu"
                     onChange={handleChange}
-                    value={formData.phoneNumber}
-                    name="phoneNumber"
+                    value={formData.phone}
+                    name="phone"
                 />
                 
                 <input

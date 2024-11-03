@@ -120,92 +120,93 @@ export default function SearchForm({ onSearch }) {
                 <button>Szukaj</button>
             </div>
         </form>
-        {more ?
-        <form className='search-form'>
-            <div className='inputs'>
-                <div className='category'>
-                    <div className='category-name'>Ilość pokoi:</div>
-                        <input
-                            type='number'
-                            placeholder='min. pokoi:'
-                            onChange={handleChange}
-                            value={searchData.minRoomsNumber} 
-                            name='minRoomsNumber'
-                        />
-                        <input
-                            type='number'
-                            placeholder='max. pokoi:'
-                            onChange={handleChange}
-                            value={searchData.maxRoomsNumber} 
-                            name='maxRoomsNumber'
-                        />
-                </div>    
-                <div className='category'>
-                    <div className='category-name'>Piętro:</div>
-                        <input
-                            type='number'
-                            placeholder='min. piętro:'
-                            onChange={handleChange}
-                            value={searchData.minEstateLevel} 
-                            name='minEstateLevel'
-                        />
-                        <input
-                            type='number'
-                            placeholder='max. piętro:'
-                            onChange={handleChange}
-                            value={searchData.maxEstateLevel} 
-                            name='maxEstateLevel'
-                        />
-                </div> 
-                <div className='options-to-check'>
-                    <div className='firstColumn'>
-                        <div className='check-input'>
-                            <label htmlFor="garage">Miejsce postojowe / garaż:</label>
-                            <input 
-                                type='checkbox'
-                                id='garage'
-                                checked={searchData.garage}
-                                name="garage"
+        <div className={`additional-options ${more ? 'visible' : ''}`}>
+            <form className='search-form'>
+                <div className='inputs'>
+                    <div className='category'>
+                        <div className='category-name'>Ilość pokoi:</div>
+                            <input
+                                type='number'
+                                placeholder='min. pokoi:'
                                 onChange={handleChange}
+                                value={searchData.minRoomsNumber} 
+                                name='minRoomsNumber'
                             />
-                        </div>
-                        <div className='check-input'>
-                            <label htmlFor="animals">Zwierzęta dozwolone: </label>
-                            <input 
-                                type='checkbox'
-                                id='animals'
-                                checked={searchData.animals}
-                                name="animals"
+                            <input
+                                type='number'
+                                placeholder='max. pokoi:'
                                 onChange={handleChange}
-                            />   
+                                value={searchData.maxRoomsNumber} 
+                                name='maxRoomsNumber'
+                            />
+                    </div>    
+                    <div className='category'>
+                        <div className='category-name'>Piętro:</div>
+                            <input
+                                type='number'
+                                placeholder='min. piętro:'
+                                onChange={handleChange}
+                                value={searchData.minEstateLevel} 
+                                name='minEstateLevel'
+                            />
+                            <input
+                                type='number'
+                                placeholder='max. piętro:'
+                                onChange={handleChange}
+                                value={searchData.maxEstateLevel} 
+                                name='maxEstateLevel'
+                            />
+                    </div> 
+                    <div className='options-to-check'>
+                        <div className='firstColumn'>
+                            <div className='check-input'>
+                                <label htmlFor="garage">Miejsce postojowe / garaż:</label>
+                                <input 
+                                    type='checkbox'
+                                    id='garage'
+                                    checked={searchData.garage}
+                                    name="garage"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className='check-input'>
+                                <label htmlFor="animals">Zwierzęta dozwolone: </label>
+                                <input 
+                                    type='checkbox'
+                                    id='animals'
+                                    checked={searchData.animals}
+                                    name="animals"
+                                    onChange={handleChange}
+                                />   
+                            </div>
                         </div>
-                    </div>
 
-                    <div className='secondColumn'>
-                        <div className='check-input'>
-                            <label htmlFor="annexKitchen">Aneks kuchenny: </label>    
-                            <input 
-                                type='checkbox'
-                                id='annexKitchen'
-                                checked={searchData.annexKitchen}
-                                name="annexKitchen"
-                                onChange={handleChange}
-                            />
-                        </div>
-                        <div className='check-input'>
-                            <label htmlFor="elevator">Winda: </label>
-                            <input 
-                                type='checkbox'
-                                id='elevator'
-                                checked={searchData.elevator}
-                                name="elevator"
-                                onChange={handleChange}
-                            />
+                        <div className='secondColumn'>
+                            <div className='check-input'>
+                                <label htmlFor="annexKitchen">Aneks kuchenny: </label>    
+                                <input 
+                                    type='checkbox'
+                                    id='annexKitchen'
+                                    checked={searchData.annexKitchen}
+                                    name="annexKitchen"
+                                    onChange={handleChange}
+                                />
+                            </div>
+                            <div className='check-input'>
+                                <label htmlFor="elevator">Winda: </label>
+                                <input 
+                                    type='checkbox'
+                                    id='elevator'
+                                    checked={searchData.elevator}
+                                    name="elevator"
+                                    onChange={handleChange}
+                                />
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>     
-        </form> : null}
+                </div>     
+            </form>
+        </div>
         <div className='more' onClick={() => {setMore(prev => !prev)}}>
             {more ? 
                 <div>zwiń<br/>⇧</div>:

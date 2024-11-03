@@ -7,6 +7,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 @Controller
@@ -23,7 +24,8 @@ public class RegistrationController {
     }
 
     @PostMapping
-    public String registerUser(RegistrationForm form) {
+    public String registerUser(@RequestBody RegistrationForm form) {
+        System.out.println(form);
         userRepository.save(form.toUser(passwordEncoder));
         return "redirect:/login";
     }
