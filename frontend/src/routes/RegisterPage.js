@@ -2,8 +2,7 @@ import { useNavigate } from 'react-router-dom';
 import '../styles/routes/register-page.css'
 
 import React from "react";
-import { useFormik } from 'formik';
-import * as Yup from 'yup';
+
 
 export default function RegisterPage() {
 
@@ -21,7 +20,7 @@ export default function RegisterPage() {
     })
 
     function isValid() {
-    //
+        return true;
     }
 
 

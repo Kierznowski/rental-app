@@ -1,0 +1,50 @@
+.account-container {
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: 85%;
+}
+
+.account-menu {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    flex: 1 0 20%;
+    gap: 5px;
+}
+
+.menu-item {
+    padding: 0 20px 0 20px;
+}
+
+.account-page-content {
+    display: flex;
+    flex: 1 1 70%;
+}
+
+.account-subpage-container {
+    min-width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: #ebd6a2;
+    margin: 20px;
+    padding: 20px;
+    border: solid 1px #c7b27d;
+    box-shadow: 2px 2px 1px 1px #a5a5a5;
+    border-radius: 4px;
+
+}
+
+.offer-short {
+    position: relative;
+}
+
+.edit-offer-button {
+    position: absolute;
+    width: 75px;
+    height: 30px;
+    font-size: 12px;
+    font-weight: 600;
+    top: 30px;
+    right: 20px;
+}
