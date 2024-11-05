@@ -20,7 +20,7 @@ export default function OfferPage() {
             const fetchImages = async () => {
                 const imageUrls = await Promise.all(
                     offerData.imageIds.map(async (imageId) => {
-                        const res = await fetch(`http://localhost:8080/file-system/image/${imageId}`,
+                        const res = await fetch(`http://localhost:9090/image/${imageId}`,
                             {
                                 method: 'GET',
                                 credentials: 'include',

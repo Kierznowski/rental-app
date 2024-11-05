@@ -19,23 +19,23 @@ public class OfferController {
     private final OfferService offerService;
 
     @GetMapping
-    public Iterable<Offer> getOffers() {
+    Iterable<Offer> getOffers() {
         return offerService.getAll();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Offer> getOfferById(@PathVariable("id") Long id) {
+    ResponseEntity<Offer> getOfferById(@PathVariable("id") Long id) {
         return offerService.getOfferById(id);
     }
 
     @PostMapping
-    public Long addOffer(@RequestBody Offer offer) throws Exception {
+    Long addOffer(@RequestBody Offer offer) throws Exception {
         Offer addedOffer = offerService.addOffer(offer);
         return addedOffer.getId();
     }
 
     @PostMapping("/search")
-    public Iterable<Offer> searchOffers(@RequestBody Map<String, Object> params) {
+    Iterable<Offer> searchOffers(@RequestBody Map<String, Object> params) {
         ResponseEntity<APIResponse> response = offerService.searchOffers(params);
         return (Iterable<Offer>) response.getBody().getData();
     }

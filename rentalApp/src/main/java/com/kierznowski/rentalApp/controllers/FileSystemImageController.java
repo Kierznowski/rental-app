@@ -3,8 +3,8 @@ package com.kierznowski.rentalApp.controllers;
 import com.kierznowski.rentalApp.services.FileLocationService;
 import com.kierznowski.rentalApp.services.OfferService;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -14,7 +14,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
-@RequestMapping("file-system")
+@RequestMapping("/file-system")
 @AllArgsConstructor
 public class FileSystemImageController {
 
@@ -22,7 +22,7 @@ public class FileSystemImageController {
     OfferService offerService;
 
     @PostMapping("/upload-images")
-    ResponseEntity<List<Long>> uploadImage(@RequestParam("multipartImage") List<MultipartFile> images,
+    ResponseEntity<HttpStatus> uploadImage(@RequestParam("multipartImage") List<MultipartFile> images,
                                      @RequestParam("offerId") Long offerId) throws Exception {
         List<Long> imageIds = new ArrayList<>();
 
@@ -30,7 +30,7 @@ public class FileSystemImageController {
             Long imageId = fileLocationService.save(image.getBytes(), image.getOriginalFilename());
             offerService.addImageToOffer(offerId, imageId);
         }
-        return ResponseEntity.ok(imageIds);
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)

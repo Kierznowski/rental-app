@@ -3,6 +3,7 @@ package com.kierznowski.rentalApp.models;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
+
 @Data
 public class RegistrationForm {
 

@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,14 +14,13 @@ import java.util.List;
 @Data
 @Table(name="Offer_data")
 @RequiredArgsConstructor
-public class Offer {
+public class Offer implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private Long userId;
     private Date createdAt = new Date();
     private String offerName;
     private String city;

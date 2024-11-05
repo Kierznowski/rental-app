@@ -72,7 +72,7 @@ export default function AddOfferPage() {
 
         formData.append('offerId', offerId);
         console.log(formData);
-        const res = await fetch(`http://localhost:8080/file-system/upload-images`, {
+        const res = await fetch(`http://localhost:9090/image`, {
             method: 'POST',
             body: formData,
             credentials: 'include'

@@ -17,3 +17,8 @@ spring:
             authorization-grant-type: authorization_code
             redirect-uri: http://localhost:9090/login/oauth2/code/authServer
             scope: addOffers,deleteOffers,openid
+  servlet:
+    multipart:
+      enabled: true
+      max-file-size: 10MB
+      max-request-size: 10MB

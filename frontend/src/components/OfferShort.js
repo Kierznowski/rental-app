@@ -35,7 +35,7 @@ export default function OfferShort(props) {
             <Link to={`./../offers/${props.id}`} target='_blank'><img src={imageSrc} alt='appartment' className='offerImage'/></Link>
             <div className='description'>
                 <div className='title-price'>
-                    <Link to={`./../offers/${props.id}`} target='_blank'><div className="title">{props.title}</div></Link>
+                    <Link to={`./../offers/${props.id}`}><div className="title">{props.title}</div></Link>
                     <div className="price">{props.price} pln / msc</div>
                 </div>
                 <div className="info">Powierzchnia: {props.area} m2 | Miasto: {props.city} | Ulica: {props.street}</div>

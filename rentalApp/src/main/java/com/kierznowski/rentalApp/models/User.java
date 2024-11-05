@@ -1,19 +1,20 @@
 package com.kierznowski.rentalApp.models;
 
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AccessLevel;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
 
 @Entity(name="User_data")
 @Data
-@AllArgsConstructor
 @NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
 @RequiredArgsConstructor
 public class User implements UserDetails {
@@ -25,15 +26,27 @@ public class User implements UserDetails {
     private Long userId;
 
     private final String email;
-    private final String password;
-    private final String firstName;
-    private final String lastName;
-    private final String phone;
-    private final String userCity;
-    private final String userStreet;
-    private final String userZip;
+    private String password;
+    private String firstName;
+    private String lastName;
+    private String phone;
+    private String userCity;
+    private String userStreet;
+    private String userZip;
     @OneToMany
-    private List<Offer> userOffers = new ArrayList<>();
+    private List<Offer> offerList;
+
+    public User(String email, String password, String firstName, String lastName,
+                String phone, String userCity, String userStreet, String userZip) {
+        this.email = email;
+        this.password = password;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.phone = phone;
+        this.userCity = userCity;
+        this.userStreet = userStreet;
+        this.userZip = userZip;
+    }
 
 
     @Override

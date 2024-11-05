@@ -21,12 +21,16 @@ export default function AccountOffers() {
             .catch(error => console.error('Error during fetching offers:', error));
         }, []);
 
+    function editOffer() {
+        
+    }
+
     return (
         <div className="account-subpage-container">
             <h3>Twoje oferty</h3>
             <div className="offer-short">
                 <OfferShort />
-                <button className="edit-offer-button">edytuj</button>
+                <button className="edit-offer-button" onClick={editOffer}>edytuj</button>
             </div>
         </div>
     )
