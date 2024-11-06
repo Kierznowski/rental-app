@@ -9,6 +9,28 @@ export default function AddOfferForm( {formData, onFormChange, onFormSubmit} ) {
                     value={formData.offerName}
                     name='offerName'
                 />
+                Wprowadź cenę mieszkania:
+                <input 
+                    type="text" 
+                    placeholder="Cena całkowita" 
+                    onChange={onFormChange}
+                    value={formData.fullPrice}
+                    name='fullPrice'
+                />
+                <input 
+                    type="text" 
+                    placeholder="Cena podstawowa" 
+                    onChange={onFormChange}
+                    value={formData.basePrice}
+                    name='basePrice'
+                />
+                <input 
+                    type="text" 
+                    placeholder="Zaliczka na media" 
+                    onChange={onFormChange}
+                    value={formData.additionalPrice}
+                    name='additionalPrice'
+                />
                 Podaj adres mieszkania:
                 <input 
                     type="text" 

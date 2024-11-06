@@ -1,61 +1,38 @@
 import './../styles/components/search-form.css';
 
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 
-export default function SearchForm({ onSearch }) {
+export default function SearchForm({ onSearch, initialCriteria }) {
 
-    const [searchData, setSearchData] = React.useState({
-        city: "",
-        minPrice: "",
-        maxPrice: "",
-        minArea: "",
-        maxArea: "",
-        maxRoomsNumber: "",
-        minRoomsNumber: "",
-        district: "",
-        minEstateLevel: "",
-        maxEstateLevel: "",
-        garage: "",
-        animals: "",
-        annexKitchen: "",
-        elevator: "",
-    });
+    const [searchData, setSearchData] = useState(initialCriteria);
+    const [more, setMore] = useState(false);
+    const navigate = useNavigate();
 
-    const [more, setMore] = React.useState(false);
+    useEffect(() => {
+        setSearchData(initialCriteria);
+    }, [initialCriteria]);
 
     function handleChange(event) {
         const {name, value, type, checked} = event.target;
-        setSearchData(prev => {
-            return {
+        setSearchData(prev => ({
                 ...prev,
                 [name]: type === "checkbox" ? checked : value
-            }
-        })
+        }));
     }
 
     function handleSubmit(event) {
-        if(validate) {
-            event.preventDefault();
-            fetch('http://localhost:9090/bff/offers/search', {
-                method: 'POST',
-                headers: {
-                    'Accept' : 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(searchData),
-                credentials: 'include'
-            })
-            .then(res => res.json())
-            .then(data => {
-                onSearch(data);
-            })
-            .catch(err => console.log(`Error during searching offer: ${err}`));
-        }
+        event.preventDefault();
+
+        const searchParams = new URLSearchParams();
+        Object.entries(searchData).forEach(([key, value]) => {
+            if(value) searchParams.append(key, value);
+        });
+
+        navigate(`?${searchParams.toString()}`);
+        onSearch(searchData);
     }
 
-    function validate() {
-        return true;
-    }
 
     return (
         <div className='search-container'>

@@ -14,7 +14,7 @@ import java.util.List;
 public class Offer {
 
     private Long id;
-    private Long userId;
+    private User user;
     private Date createdAt;
     private String offerName;
     private String city;

@@ -21,6 +21,8 @@ public class Offer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @ManyToOne
+    private User user;
     private Date createdAt = new Date();
     private String offerName;
     private String city;

@@ -1,6 +1,7 @@
 package com.kierznowski.rentalApp.controllers;
 
 import com.kierznowski.rentalApp.models.Offer;
+import com.kierznowski.rentalApp.models.User;
 import com.kierznowski.rentalApp.repositories.OfferRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -8,7 +9,9 @@ import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Optional;
 
@@ -36,8 +39,10 @@ public class OfferController {
 
     @PostMapping(consumes = "application/json")
     @ResponseStatus(HttpStatus.CREATED)
-    public Offer postOffer(@RequestBody Offer offer) {
-        return offerRepository.save(offer);
+    public Offer postOffer(@RequestBody Offer offer, @AuthenticationPrincipal User user) {
+        offer.setUser(user);
+        offerRepository.save(offer);
+        return offer;
     }
 
     @PutMapping(path="/{offerId}", consumes = "application/json")

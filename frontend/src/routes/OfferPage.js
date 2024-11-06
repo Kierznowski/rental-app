@@ -40,12 +40,28 @@ export default function OfferPage() {
 
     return(
         <div className="offerContainer">
-            <ImageSlider images = {images}/>
             <div className='title'>{offerData.offerName}</div>
+            <ImageSlider images = {images}/>
             <div className='price'>Cena całkowita: {offerData.fullPrice} pln / miesiąc</div>
-            <div className='address'>{offerData.city}, {offerData.street}, {offerData.district}, {offerData.zip}</div>
-            <div className='additionalInfo'>Rok budowy: {offerData.buildingYear}, Powierzchnia: {offerData.area}, Liczba pokoi: {offerData.roomsNumber},
-            Piętro: {offerData.estateLevel}, Aneks kuchenny: {offerData.annexKitchen}, Winda: {offerData.elevator}, Zwierzęta mile widziane: {offerData.animals}</div>
+            <div className='address'>Lokalizacja: {offerData.city}, {offerData.street}, {offerData.district}, {offerData.zip}</div>
+            <div className='row1'>
+                <div className='offer-details'>
+                    <h3>Szczegółowe informacje:</h3>
+                    <div className='info'>Cena podstawowa: {offerData.basePrice}</div>
+                    <div className='info'>Opłaty dodatkowe (media, czynsz etc.): {offerData.additionalPrice}</div>
+                    <div className='info'>Rok budowy: {offerData.buildingYear}</div> 
+                    <div className='info'>Powierzchnia: {offerData.area} m<sup>2</sup></div>
+                    <div className='info'>Liczba pokoi: {offerData.roomsNumber}</div>
+                    <div className='info'>Piętro: {offerData.estateLevel}</div>
+                    <div className='info'>Aneks kuchenny: {offerData.annexKitchen ? "Tak" : "Nie"}</div> 
+                    <div className='info'>Winda: {offerData.elevator ? "Tak" : "Nie"}</div> 
+                    <div className='info'>Zwierzęta mile widziane: {offerData.animals ? "Tak" : "Nie"}</div>
+                </div>
+                <div className='rentierDetails'>
+                    <div>Imię wynajmującego: {offerData.user === null ? "Trzeba sprawdzić z logowaniem" : "Coś tam siedzi"}</div>
+                    <div>Telefon wynajmującego: {offerData.user === null ? "Trzeba sprawdzić z logowaniem" : "Coś tam siedzi"}</div>
+                </div>
+            </div>
         </div>
     )
 }
