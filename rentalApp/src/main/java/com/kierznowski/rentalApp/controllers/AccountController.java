@@ -42,19 +42,4 @@ public class AccountController {
         userRepository.save(user);
         return new ResponseEntity<HttpStatus>(HttpStatus.OK);
     }
-
-    @PatchMapping("/password/{userId}")
-    public ResponseEntity<HttpStatus> changePassword(@PathVariable Long userId, @RequestBody PasswordChangeRequest request) {
-        User user = userRepository.findById(userId).get();
-        if (user == null) {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
-        }
-        if (request.getPassword() != null && !request.getPassword().isEmpty()) {
-            user.setPassword(passwordEncoder.encode(request.getPassword()));
-            userRepository.save(user);
-            return new ResponseEntity<>(HttpStatus.CREATED);
-        } else {
-            return new ResponseEntity<HttpStatus>(HttpStatus.BAD_REQUEST);
-        }
-    }
 }

@@ -1,9 +1,7 @@
 package com.kierznowski.rentalapp.client.controllers;
 
-import com.kierznowski.rentalapp.client.services.ImageService;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ByteArrayResource;
-import org.springframework.core.io.FileSystemResource;
 import org.springframework.http.*;
 import org.springframework.util.LinkedMultiValueMap;
 import org.springframework.util.MultiValueMap;

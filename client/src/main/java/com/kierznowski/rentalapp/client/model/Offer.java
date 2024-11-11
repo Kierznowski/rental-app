@@ -2,7 +2,6 @@ package com.kierznowski.rentalapp.client.model;
 
 import lombok.Data;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import java.math.BigDecimal;
 import java.util.Date;
@@ -14,7 +13,7 @@ import java.util.List;
 public class Offer {
 
     private Long id;
-    private User user;
+    private UserDTO user;
     private Date createdAt;
     private String offerName;
     private String city;

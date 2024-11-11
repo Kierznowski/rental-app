@@ -27,7 +27,6 @@ import org.springframework.security.oauth2.server.authorization.config.annotatio
 import org.springframework.security.oauth2.server.authorization.config.annotation.web.configurers.OAuth2AuthorizationServerConfigurer;
 import org.springframework.security.oauth2.server.authorization.settings.AuthorizationServerSettings;
 import org.springframework.security.oauth2.server.authorization.settings.ClientSettings;
-import org.springframework.security.oauth2.server.authorization.settings.TokenSettings;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 import org.springframework.web.cors.CorsConfiguration;
@@ -39,8 +38,8 @@ import java.security.KeyPairGenerator;
 import java.security.NoSuchAlgorithmException;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
-import java.time.Duration;
 import java.util.Arrays;
+import java.util.List;
 import java.util.UUID;
 
 @EnableWebSecurity
@@ -50,32 +49,27 @@ public class AuthorizationServerConfig {
     @Bean
     @Order(1)
     public SecurityFilterChain authSecurityFilterChain(HttpSecurity http) throws Exception {
+        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.csrf(csrf -> csrf.disable());
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
-        OAuth2AuthorizationServerConfiguration.applyDefaultSecurity(http);
         http.getConfigurer(OAuth2AuthorizationServerConfigurer.class)
                 .oidc(Customizer.withDefaults());
-        http.exceptionHandling(exceptions -> exceptions
-                .authenticationEntryPoint(
-                        new LoginUrlAuthenticationEntryPoint("/login")
-                ));
-        //http.oauth2ResourceServer(oauth -> oauth.jwt(Customizer.withDefaults()));
+
+        http.exceptionHandling((e) ->
+                e.authenticationEntryPoint(new LoginUrlAuthenticationEntryPoint("/login")));
+
         return http.build();
     }
 
     @Bean
     @Order(2)
     SecurityFilterChain defaultSecurityFilterChain(HttpSecurity http) throws Exception {
-
         return http
                 .csrf(csrf -> csrf.disable())
                 .cors(cors -> cors.configurationSource(corsConfigurationSource()))
-                //.formLogin(form -> form.successHandler(new RefererAuthenticationSuccessHandler()))
-
-                .authorizeHttpRequests(c -> c
-                        .requestMatchers("/oauth2/authorization/authServer", "/oauth2/authorize", "/oauth2/token", "/login/**").permitAll()
-                        //.anyRequest().authenticated())
-                        .anyRequest().authenticated())
+                .authorizeHttpRequests(c ->
+                        c.requestMatchers("/oauth2/authorization/authServer", "/oauth2/authorize", "/oauth2/token", "/login/**").permitAll()
+                                .anyRequest().authenticated())
                 .formLogin(Customizer.withDefaults())
                 .build();
     }
@@ -84,16 +78,16 @@ public class AuthorizationServerConfig {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:9090"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
         return source;
     }
 
-    // TO DO: custom Registered client repository for database
+    // TO DO: custom Registered client repository for DB
     @Bean
     public RegisteredClientRepository registeredClientRepository(PasswordEncoder passwordEncoder) {
         RegisteredClient registeredClient = RegisteredClient.withId(UUID.randomUUID().toString())
@@ -101,11 +95,9 @@ public class AuthorizationServerConfig {
                 .clientSecret(passwordEncoder.encode("secret"))
                 .clientAuthenticationMethod(ClientAuthenticationMethod.CLIENT_SECRET_BASIC)
                 .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-                .authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
-                .tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofMinutes(15)).build())
-                .redirectUri("http://localhost:9090/login/oauth2/code/authServer")
-                .scope("addOffers")
-                .scope("deleteOffers")
+                //.authorizationGrantType(AuthorizationGrantType.REFRESH_TOKEN)
+                //.tokenSettings(TokenSettings.builder().accessTokenTimeToLive(Duration.ofMinutes(15)).build())
+                .redirectUri("http://localhost:9090/login/oauth2/code/rentalapp-client")
                 .scope(OidcScopes.OPENID)
                 .clientSettings(ClientSettings.builder()
                         .requireProofKey(false)
@@ -136,13 +128,7 @@ public class AuthorizationServerConfig {
         return new ImmutableJWKSet<>(jwkSet);
     }
 
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return new BCryptPasswordEncoder();
-    }
-
-    // TO DO: implement custom UserDetailsService
+    // TO DO: implement custom UserDetailsService with DB
     @Bean
     UserDetailsService userDetailsService(UserRepository userRepository) {
         return email -> {
@@ -154,14 +140,17 @@ public class AuthorizationServerConfig {
         };
     }
 
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return new BCryptPasswordEncoder();
+    }
+
     // Here we can customize endpoints
     @Bean
     public AuthorizationServerSettings authorizationServerSettings() {
         return AuthorizationServerSettings.builder().build();
     }
-
-
 }
 /*
-http://127.0.0.1:9000/oauth2/authorize?response_type=code&client_id=rentalapp-client&redirect_uri=http://localhost:9090/login/oauth2/code/authServer&scope=addOffers+deleteOffers
+http://localhost:9000/oauth2/authorize?response_type=code&client_id=rentalapp-client&redirect_uri=http://localhost:9090/login/oauth2/code/rentalapp-client&scope=openid
 */

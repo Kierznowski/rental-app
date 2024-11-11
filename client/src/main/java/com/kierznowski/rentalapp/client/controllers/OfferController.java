@@ -13,15 +13,16 @@ import java.util.Map;
 @RestController
 @RequestMapping("/bff/offers")
 @RequiredArgsConstructor
-@CrossOrigin("http://localhost:3000")
 public class OfferController {
 
     private final OfferService offerService;
+
 
     @GetMapping
     Iterable<Offer> getOffers() {
         return offerService.getAll();
     }
+
 
     @GetMapping("/{id}")
     ResponseEntity<Offer> getOfferById(@PathVariable("id") Long id) {

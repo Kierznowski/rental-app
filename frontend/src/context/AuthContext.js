@@ -1,17 +1,34 @@
-import React, { createContext, useState, useContext } from 'react';
+import React, { createContext, useState, useEffect } from 'react';
 
-const AuthContext = createContext();
+export const AuthContext = createContext();
 
-export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [authState, setAuthState] = useState(false);
 
-  const login = () => setIsLoggedIn(true);
-  const logout = () => setIsLoggedIn(false);
+  useEffect(() => {
+    const checkAuthStatus = async () => {
+      try {
+        const response = await fetch('http://localhost:9090/auth/checkAuth', {
+          method: 'GET',
+          credentials: 'include',
+        })
+
+        if(response.ok) {
+          setAuthState(true);
+        } else {
+          setAuthState(false);
+        }
+      } catch(error) {
+        console.error('Error when checking authentication status: ', error);
+        setAuthState(false);
+      }
+    };
+    checkAuthStatus();
+  }, []);
 
   return (
-    <AuthContext.Provider value={{ isLoggedIn, login, logout }}>
+    <AuthContext.Provider value={{ authState, setAuthState }}>
       {children}
     </AuthContext.Provider>
   );

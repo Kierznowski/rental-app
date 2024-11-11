@@ -18,6 +18,7 @@ import java.util.Optional;
 @RestController
 @RequestMapping(path="/api/offers", produces = "application/json")
 @AllArgsConstructor
+@CrossOrigin("http://localhost:9090")
 public class OfferController {
 
     private OfferRepository offerRepository;

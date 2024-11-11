@@ -8,7 +8,6 @@ import org.springframework.http.HttpMethod;
 import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
-import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.oauth2.client.OAuth2AuthorizedClient;
@@ -29,15 +28,16 @@ public class ClientConfig {
 
     @Bean
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.csrf(csrf -> csrf.disable());
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
-
+        http.csrf(csrf -> csrf.disable());
+        http.oauth2Login(Customizer.withDefaults());
         http.authorizeHttpRequests(auth -> auth
                 .requestMatchers(HttpMethod.GET, "/bff/offers").permitAll()
-                .anyRequest().permitAll());
-        http.oauth2Login(Customizer.withDefaults());
-        http.oauth2Client(Customizer.withDefaults())
-                .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED));
+                .requestMatchers(HttpMethod.GET, "/bff/offers/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/bff/offers/search").permitAll()
+                .requestMatchers(HttpMethod.GET, "/image/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                .anyRequest().authenticated());
         return http.build();
     }
 
@@ -53,19 +53,24 @@ public class ClientConfig {
         return source;
     }
 
+
     @Bean
     @RequestScope
     public OfferService offerService(OAuth2AuthorizedClientService clientService) {
+
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String accessToken = null;
-        if(authentication.getClass().isAssignableFrom(OAuth2AuthenticationToken.class)) {
+        System.out.println("Before big IF");
+        System.out.println(authentication);
+        if(authentication instanceof OAuth2AuthenticationToken) {
             OAuth2AuthenticationToken token = (OAuth2AuthenticationToken) authentication;
-
             String clientRegistrationId = token.getAuthorizedClientRegistrationId();
-            if(clientRegistrationId.equals("rentalapp-client")) {
+            if(clientRegistrationId.equals("authServer")) {
                 OAuth2AuthorizedClient client = clientService.loadAuthorizedClient(clientRegistrationId, token.getName());
                 accessToken = client.getAccessToken().getTokenValue();
+                System.out.println("Acces token in bean: " + accessToken);
             }
+            System.out.println("After if");
         }
         return new RestOfferService(accessToken);
     }

@@ -14,9 +14,10 @@ spring:
             client-name: rentalapp-client
             client-secret: secret
             provider: authServer
+            client-authentication-method: client_secret_basic
             authorization-grant-type: authorization_code
-            redirect-uri: http://localhost:9090/login/oauth2/code/authServer
-            scope: addOffers,deleteOffers,openid
+            redirect-uri: http://localhost:9090/login/oauth2/code/rentalapp-client
+            scope: openid
   servlet:
     multipart:
       enabled: true

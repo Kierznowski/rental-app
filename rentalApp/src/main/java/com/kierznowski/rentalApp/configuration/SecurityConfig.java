@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.GrantedAuthority;
@@ -21,8 +22,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.CorsConfigurationSource;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 
-import java.util.Arrays;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Configuration
@@ -38,15 +39,17 @@ public class SecurityConfig  {
     }
 
     @Bean
-    public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
+                .cors(c -> c.configurationSource(corsConfigurationSource()))
                 .csrf(csrf -> csrf.disable())
-                .cors(cors -> cors.configurationSource(corsConfigurationSource()))
                 .oauth2ResourceServer(c -> c.jwt(j -> j.jwkSetUri(keySetUri)))
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers(HttpMethod.POST, "/api/offers").permitAll()
-                        //.requestMatchers(HttpMethod.POST, "/api/offers").hasAuthority("SCOPE_addOffers")
-                        //.requestMatchers(HttpMethod.DELETE, "/api/offers/**").hasAuthority("SCOPE_deleteOffers")
+                        .requestMatchers(HttpMethod.GET, "/api/offers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/file-system/image/**").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/register").permitAll()
+                        .requestMatchers(HttpMethod.POST, "/api/searchOffers").permitAll()
+                        .requestMatchers(HttpMethod.GET, "/api/searchOffers").permitAll()
                         .anyRequest().permitAll())
                 .build();
     }
@@ -54,9 +57,9 @@ public class SecurityConfig  {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:9090", "http://localhost:9000"));
-        configuration.setAllowedMethods(Arrays.asList("GET", "POST", "PUT", "DELETE", "OPTIONS"));
-        configuration.setAllowedHeaders(Arrays.asList("*"));
+        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:9090", "http://localhost:9000"));
+        configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
+        configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
         source.registerCorsConfiguration("/**", configuration);
@@ -85,16 +88,4 @@ public class SecurityConfig  {
             return mappedAuthorities;
         };
     }
-
-    @Bean
-    public UserDetailsService userDetailsService(UserRepository userRepository) {
-        return email -> {
-            User user = userRepository.findByEmail(email);
-            if(user != null){
-                return user;
-            }
-            throw new UsernameNotFoundException("User " + email + " not found.");
-        };
-    }
-
 }

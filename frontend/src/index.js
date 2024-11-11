@@ -12,6 +12,8 @@ import LoginPage from './routes/LoginPage';
 import ContactPage from './routes/ContactPage';
 import OfferPage from './routes/OfferPage';
 import RegisterPage from './routes/RegisterPage';
+import ProtectedRoute from './context/ProtectedRoute';
+import { AuthProvider } from './context/AuthContext';
 
 // import reportWebVitals from './reportWebVitals';
 
@@ -23,7 +25,7 @@ const router = createBrowserRouter([
     children: [
       {
         path: '/',
-        element: <HomePage />
+        element: <HomePage />,
       },
       {
         path: 'offers',
@@ -35,7 +37,11 @@ const router = createBrowserRouter([
       },
       {
         path: 'account',
-        element: <AccountPage />
+        element: (
+          <ProtectedRoute>
+            <AccountPage />
+          </ProtectedRoute>
+        )
       },
       {
         path: 'login',
@@ -60,8 +66,9 @@ const router = createBrowserRouter([
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <React.StrictMode>
-    <RouterProvider router={router} />
-    {/* <App /> */}
+    <AuthProvider>
+      <RouterProvider router={router} />
+    </AuthProvider>
   </React.StrictMode>
 );
 

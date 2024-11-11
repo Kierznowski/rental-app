@@ -18,11 +18,6 @@ public class RegistrationController {
     private UserRepository userRepository;
     private PasswordEncoder passwordEncoder;
 
-    @GetMapping
-    public String registrationForm() {
-        return "register";
-    }
-
     @PostMapping
     public String registerUser(@RequestBody RegistrationForm form) {
         userRepository.save(form.toUser(passwordEncoder));

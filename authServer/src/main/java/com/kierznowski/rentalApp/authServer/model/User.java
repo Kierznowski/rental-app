@@ -38,6 +38,11 @@ public class User implements UserDetails {
     }
 
     @Override
+    public String getPassword() {
+        return password;
+    }
+
+    @Override
     @Transient
     public boolean isAccountNonExpired() {
         return true;
