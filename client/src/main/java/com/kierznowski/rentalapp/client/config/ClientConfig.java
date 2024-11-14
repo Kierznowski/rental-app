@@ -30,11 +30,22 @@ public class ClientConfig {
     SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http.cors(cors -> cors.configurationSource(corsConfigurationSource()));
         http.csrf(csrf -> csrf.disable());
-        http.oauth2Login(Customizer.withDefaults());
+
+        http.oauth2Login(login -> login.successHandler(((request, response, authentication) -> {
+            String redirectUri = (String) request.getSession().getAttribute("redirect_uri");
+            if(redirectUri != null) {
+                response.sendRedirect(redirectUri);
+            } else {
+                response.sendRedirect("http://localhost:3000");
+            }
+        })));
+
         http.authorizeHttpRequests(auth -> auth
-                .requestMatchers(HttpMethod.GET, "/bff/offers").permitAll()
-                .requestMatchers(HttpMethod.GET, "/bff/offers/**").permitAll()
-                .requestMatchers(HttpMethod.POST, "/bff/offers/search").permitAll()
+                .requestMatchers(HttpMethod.POST, "/bff/auth/login").permitAll()
+                .requestMatchers(HttpMethod.GET, "/bff/auth/is-auth").permitAll()
+                .requestMatchers(HttpMethod.GET, "/offers").permitAll()
+                .requestMatchers(HttpMethod.GET, "/offers/**").permitAll()
+                .requestMatchers(HttpMethod.POST, "/offers/searched-offers").permitAll()
                 .requestMatchers(HttpMethod.GET, "/image/**").permitAll()
                 .requestMatchers(HttpMethod.POST, "/register").permitAll()
                 .anyRequest().authenticated());

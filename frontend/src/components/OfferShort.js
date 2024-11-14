@@ -10,7 +10,7 @@ export default function OfferShort(props) {
     useEffect(() => {
         const fetchImage = async () => {
             try {
-                const res = await fetch(`http://localhost:8080/file-system/image/${props.imageId}`, {
+                const res = await fetch(`http://localhost:9090/image/${props.imageId}`, {
                     method: 'GET',
                     credentials: 'include'
                 });

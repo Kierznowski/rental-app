@@ -37,7 +37,7 @@ export default function OfferSearchPage() {
             (value) => value === "" || value === false
         );
         if(isCriteriaEmpty) {
-            fetch(`http://127.0.0.1:9090/bff/offers`, {
+            fetch(`http://127.0.0.1:9090/offers`, {
                 method: "GET",
                 credentials: "include",
             })
@@ -47,7 +47,7 @@ export default function OfferSearchPage() {
                     console.error("Error during fetching recent offers:", error)
                 );
         } else {
-            fetch(`http://127.0.0.1:9090/bff/offers/search`, {
+            fetch(`http://127.0.0.1:9090/offers/searched-offers`, {
                 method: "POST",
                 headers: {
                     'Content-Type': 'application/json'

@@ -33,7 +33,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'addOffer',
-        element: <AddOfferPage />
+        element: 
+          <ProtectedRoute>
+            <AddOfferPage />
+          </ProtectedRoute>
       },
       {
         path: 'account',

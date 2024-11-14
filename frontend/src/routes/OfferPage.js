@@ -9,7 +9,7 @@ export default function OfferPage() {
     const [images, setImages] = React.useState([]);
 
     React.useEffect(() => {
-        fetch(`http://localhost:9090/bff/offers/${id}`)
+        fetch(`http://localhost:9090/offers/${id}`)
             .then(res => res.json())
             .then(data => setOfferData(data))
             .catch(error => console.log('Error during fetching offer data:', error));

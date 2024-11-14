@@ -11,7 +11,7 @@ import java.util.Map;
 
 
 @RestController
-@RequestMapping("/bff/offers")
+@RequestMapping("/offers")
 @RequiredArgsConstructor
 public class OfferController {
 
@@ -35,7 +35,7 @@ public class OfferController {
         return addedOffer.getId();
     }
 
-    @PostMapping("/search")
+    @PostMapping("/searched-offers")
     Iterable<Offer> searchOffers(@RequestBody Map<String, Object> params) {
         ResponseEntity<APIResponse> response = offerService.searchOffers(params);
         return (Iterable<Offer>) response.getBody().getData();

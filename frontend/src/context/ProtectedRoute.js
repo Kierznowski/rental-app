@@ -6,7 +6,7 @@ export default function ProtectedRoute({children}) {
     
     const { authState } = useContext(AuthContext);
 
-    if(!authState.isAuthenticated) {
+    if(!authState) {
         return (
             <Navigate to="/login" />
         )

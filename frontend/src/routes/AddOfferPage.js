@@ -42,7 +42,7 @@ export default function AddOfferPage() {
     async function handleSubmit(event) {
         event.preventDefault();
         try {   
-            const res = await fetch('http://localhost:9090/bff/offers', {
+            const res = await fetch('http://localhost:9090/offers', {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',

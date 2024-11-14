@@ -8,7 +8,7 @@ export default function AccountOffers() {
     const id = 1;   //to do
 
     React.useEffect(() => {
-        fetch(`http://127.0.0.1:9090/bff/account/${id}/offers`,
+        fetch(`http://127.0.0.1:9090/offers/user/${id}`,
             {
                 method: 'GET',
                 credentials: 'include',
