@@ -4,7 +4,6 @@ import com.kierznowski.rentalApp.models.Offer;
 import com.kierznowski.rentalApp.models.User;
 import com.kierznowski.rentalApp.repositories.OfferRepository;
 import com.kierznowski.rentalApp.repositories.UserRepository;
-import jakarta.persistence.Id;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -87,11 +86,6 @@ public class RentalAppApplication {
 				testOffer3.setElevator(true);
 				testOffer3.setAnimals(false);
 				offerRepository.save(testOffer3);
-
-				//Test User - just for testing purpose
-				userRepository.save(
-						new User("test@test.com", passwordEncoder.encode("test"), "TestUser",
-								"test", "test", "test", "test", "test"));
 			}
 
 		};

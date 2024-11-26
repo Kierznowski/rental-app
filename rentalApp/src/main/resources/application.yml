@@ -8,5 +8,15 @@ spring:
       max-request-size: 10MB
 keySetURI: http://127.0.0.1:9000/oauth2/jwks
 
+client:
+  url:
+    base: http://localhost:9090
+frontend:
+  url:
+    base: http://localhost:3000
+authorization-server:
+  url:
+    base: http://127.0.0.1:9000
+
 
 

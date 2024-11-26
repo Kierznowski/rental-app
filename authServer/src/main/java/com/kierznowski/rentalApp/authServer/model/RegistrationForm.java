@@ -1,12 +1,11 @@
-package com.kierznowski.rentalApp.models;
+package com.kierznowski.rentalApp.authServer.model;
 
 import lombok.Data;
-import org.springframework.security.crypto.password.PasswordEncoder;
-
+import lombok.RequiredArgsConstructor;
 
 @Data
+@RequiredArgsConstructor
 public class RegistrationForm {
-
 
     private String email;
     private String password;
@@ -16,9 +15,4 @@ public class RegistrationForm {
     private String userCity;
     private String userStreet;
     private String userZip;
-
-    public User toUser() {
-        return new User(email, firstName, secondName, phone, userCity, userStreet, userZip);
-    }
-
 }

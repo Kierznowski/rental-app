@@ -29,12 +29,15 @@ public class FileSystemImageController {
         for(MultipartFile image : images) {
             Long imageId = fileLocationService.save(image.getBytes(), image.getOriginalFilename());
             offerService.addImageToOffer(offerId, imageId);
+            imageIds.add(imageId);
         }
+        System.out.println("Controller called: offer id: " + offerId + " imageId: " + imageIds);
         return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @GetMapping(value = "/image/{imageId}", produces = MediaType.IMAGE_JPEG_VALUE)
     FileSystemResource downloadImage(@PathVariable Long imageId) throws Exception {
+        System.out.println("image get controller called with imageId: " + imageId);
         return fileLocationService.find(imageId);
     }
 }

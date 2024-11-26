@@ -78,6 +78,8 @@ export default function AddOfferPage() {
             credentials: 'include'
         });
 
+        console.log(formData);
+
         return res.ok;
     }
 

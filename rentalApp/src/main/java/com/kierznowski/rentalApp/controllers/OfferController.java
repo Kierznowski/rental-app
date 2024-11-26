@@ -11,14 +11,12 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.bind.support.SessionStatus;
 
 import java.util.Optional;
 
 @RestController
 @RequestMapping(path="/api/offers", produces = "application/json")
 @AllArgsConstructor
-@CrossOrigin("http://localhost:9090")
 public class OfferController {
 
     private OfferRepository offerRepository;

@@ -1,6 +1,5 @@
 package com.kierznowski.rentalApp.controllers;
 
-import com.kierznowski.rentalApp.models.PasswordChangeRequest;
 import com.kierznowski.rentalApp.models.User;
 import com.kierznowski.rentalApp.repositories.UserRepository;
 import lombok.AllArgsConstructor;

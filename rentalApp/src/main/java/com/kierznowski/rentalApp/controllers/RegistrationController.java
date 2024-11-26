@@ -1,11 +1,12 @@
 package com.kierznowski.rentalApp.controllers;
 
 import com.kierznowski.rentalApp.models.RegistrationForm;
+import com.kierznowski.rentalApp.models.User;
 import com.kierznowski.rentalApp.repositories.UserRepository;
+import com.kierznowski.rentalApp.services.UserService;
 import lombok.AllArgsConstructor;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,11 +17,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 public class RegistrationController {
 
     private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    private UserService userService;
 
     @PostMapping
-    public String registerUser(@RequestBody RegistrationForm form) {
-        userRepository.save(form.toUser(passwordEncoder));
+    public String saveUserData(@RequestBody RegistrationForm form, Long userId) {
+        User newUser = form.toUser();
+        newUser.setUserId(userId);
+        userRepository.save(newUser);
         return "redirect:/login";
     }
 

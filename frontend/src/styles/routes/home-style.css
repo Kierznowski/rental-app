@@ -45,13 +45,12 @@
 }
 
 .action-button {
+    background-color: #011435;
     height: 60px;
     width: 180px;
     font-size: 22px;
     border: none;
     border-radius: 8px;
-    background-color: #021e4f;
-    color: white;
     cursor: pointer;
 }
 

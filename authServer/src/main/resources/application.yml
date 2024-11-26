@@ -1,2 +1,14 @@
 server:
   port: 9000
+
+resource:
+  url:
+    base: http://localhost:8080
+
+client:
+  url:
+    base: http://localhost:9090
+
+frontend:
+  url:
+    base: http://localhost:3000

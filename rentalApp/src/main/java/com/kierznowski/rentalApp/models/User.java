@@ -33,7 +33,7 @@ public class User {
     @OneToMany
     private List<Offer> offerList;
 
-    public User(String email, String password, String firstName, String lastName,
+    public User(String email, String firstName, String lastName,
                 String phone, String userCity, String userStreet, String userZip) {
         this.email = email;
         this.firstName = firstName;

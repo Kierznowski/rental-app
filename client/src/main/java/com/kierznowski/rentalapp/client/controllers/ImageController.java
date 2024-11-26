@@ -1,5 +1,6 @@
 package com.kierznowski.rentalapp.client.controllers;
 
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.*;
@@ -15,6 +16,12 @@ import java.util.List;
 @RequestMapping("/image")
 public class ImageController {
 
+    @Value("${resource.url.image.download}")
+    String downloadUrl;
+
+
+    @Value("${resource.url.image.upload}")
+    String uploadUrl;
     RestTemplate restTemplate;
 
     public ImageController() {
@@ -24,7 +31,7 @@ public class ImageController {
     @GetMapping(path = "/{imageId}")
     HttpEntity<byte[]> downloadImage(@PathVariable Long imageId) throws Exception {
         ResponseEntity<byte[]> response = restTemplate.getForEntity(
-                "http://localhost:8080/file-system/image/" + imageId, byte[].class);
+                downloadUrl + imageId, byte[].class);
         HttpHeaders headers = new HttpHeaders();
         headers.setContentType(MediaType.IMAGE_JPEG);
         return new HttpEntity<>(response.getBody(), headers);
@@ -51,11 +58,12 @@ public class ImageController {
         HttpEntity<MultiValueMap<String, Object>> requestEntity = new HttpEntity<>(body, headers);
         System.out.println(requestEntity);
         ResponseEntity<List<Long>> response = restTemplate.exchange(
-                "http://localhost:8080/file-system/upload-images",
+                uploadUrl,
                 HttpMethod.POST,
                 requestEntity,
                 new ParameterizedTypeReference<List<Long>>() {}
         );
+        System.out.println(requestEntity);
         return response;
     }
 

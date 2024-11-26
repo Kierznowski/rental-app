@@ -1,6 +1,27 @@
 server:
   port: 9090
-
+  bff-url: http://localhost:9090
+frontend:
+  url:
+    base: http://localhost:3000
+resource:
+  url:
+    base: http://localhost:8080
+    image:
+      download: ${resource.url.base}/file-system/image/
+      upload: ${resource.url.base}/file-system/upload-images
+    user:
+      register-user: ${resource.url.base}/register
+      edit-data: ${resource.url.base}/account
+    offer:
+      recent: ${resource.url.base}/api/offers?recent
+      add: ${resource.url.base}/api/offers
+      search: ${resource.url.base}/api/searchOffers
+      getOffer: ${resource.url.base}/api/offers/
+authorization-server:
+  url:
+    base: http://localhost:9000
+    register-user: ${authorization-server.url.base}/account
 spring:
   security:
     oauth2:

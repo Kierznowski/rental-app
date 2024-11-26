@@ -1,18 +1,13 @@
 package com.kierznowski.rentalApp.configuration;
 
-import com.kierznowski.rentalApp.models.User;
-import com.kierznowski.rentalApp.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.mapping.GrantedAuthoritiesMapper;
-import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.oauth2.core.oidc.user.OidcUserAuthority;
@@ -32,6 +27,12 @@ public class SecurityConfig  {
 
     @Value("${keySetURI}")
     private String keySetUri;
+    @Value("${client.url.base}")
+    String clientUrl;
+    @Value("${frontend.url.base}")
+    String frontendUrl;
+    @Value("${authorization-server.url.base}")
+    String authServerUrl;
 
     @Bean
     public PasswordEncoder passwordEncoder() {
@@ -57,7 +58,7 @@ public class SecurityConfig  {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:9090", "http://localhost:9000"));
+        configuration.setAllowedOrigins(List.of(frontendUrl, clientUrl, authServerUrl));
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

@@ -4,19 +4,18 @@ import com.kierznowski.rentalapp.client.model.Offer;
 import com.kierznowski.rentalapp.client.searching.APIResponse;
 import com.kierznowski.rentalapp.client.services.OfferService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpMethod;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.Map;
 
-
+@RequiredArgsConstructor
 @RestController
 @RequestMapping("/offers")
-@RequiredArgsConstructor
 public class OfferController {
 
     private final OfferService offerService;
-
 
     @GetMapping
     Iterable<Offer> getOffers() {

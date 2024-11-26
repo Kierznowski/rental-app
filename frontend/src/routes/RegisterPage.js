@@ -32,7 +32,7 @@ export default function RegisterPage() {
         } 
         
         try {
-            const res = await fetch("http://localhost:9090/register", {
+            const res = await fetch("http://localhost:9090/bff/auth/register", {
                 method: 'POST',
                 headers: {
                     'Accept': 'application/json',
