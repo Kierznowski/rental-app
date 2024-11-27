@@ -14,9 +14,7 @@ The project currently consists of four applications:
 - Client – A Spring application responsible for communication between the frontend and backend, known as the BFF (Backend for Frontend). Its purpose is to separate the frontend from the authorization server. The Client handles authorization "on behalf" of the frontend, ensuring that tokens are not exposed to the frontend.
 - AuthServer – An authorization server. A custom authorization server written in Spring, responsible for generating and verifying tokens during authorization.
 ## Screenshots
-<img src="/screenshots/rentalapp-main.jpg" />
-<img src="/screenshots/rentalapp-addOffer.jpg" />
-<img src="/screenshots/rentalap-offers.jpg " />
+<img src="/screenshots/homepagev2.png" />
 
 
 ## Application Status
