@@ -15,52 +15,25 @@
 }
 
 
-.appartment-img {
-    max-width: 30rem;
-    border-radius: 5px;
-    height: auto;
+.appartment-img1 {
+    width: 600px;
+    border-radius: 8px;
     display: block;
 }
+
+.appartment-img2 {
+    width: 70%;
+    border-radius: 8px;
+    display: block;
+}
+
 
 .home-content1, .home-content2 {
     display: flex;
     flex-direction: column;
     width: 600px;
-    font-size: 22px;
+    font-size: 16px;
     padding: 20px 50px;
     text-align: justify;
     line-height: 150%;
 }
-
-.action-bar {
-    background-color: #ebd6a2;    ;
-    padding: 40px 0;
-    width: 100%;
-    margin: 0 auto;
-    display: flex;
-    justify-content: center;   
-    gap: 100px; 
-    border-top: solid 2px #9e7d2b;
-    border-bottom: solid 2px #9e7d2b;
-}
-
-.action-button {
-    background-color: #011435;
-    height: 60px;
-    width: 180px;
-    font-size: 22px;
-    border: none;
-    border-radius: 8px;
-    cursor: pointer;
-}
-
-.action-button:active {
-    box-shadow: inset 5px 5px 10px -3px rgba(0, 0, 0, 0.7);
-}
-
-.action-button:hover {
-    color: grey;
-}
-
-
-

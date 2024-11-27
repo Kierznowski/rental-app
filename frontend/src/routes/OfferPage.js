@@ -3,7 +3,7 @@ import React, { useContext } from 'react';
 import './../styles/routes/offer-style.css';
 import ImageSlider from '../components/ImageSlider';
 import { AuthContext } from '../context/AuthContext';
-import defaultProfilePic from '../assets/images/default-profile-pic.png';
+import defaultProfilePic from '../assets/images/icons/default-profile-pic.png';
 
 export default function OfferPage() {
     const { id } = useParams();

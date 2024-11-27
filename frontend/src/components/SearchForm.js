@@ -36,9 +36,9 @@ export default function SearchForm({ onSearch, initialCriteria }) {
 
     return (
         <div className='search-container'>
-        <form className='search-form' onSubmit={handleSubmit}>
+        <form className='main-search-form' onSubmit={handleSubmit}>
             <div className='inputs'>
-                <div className='category'>
+                <div className='search-category'>
                     <div className='category-name'>Lokalizacja:</div>
                     <input 
                         type='text' 
