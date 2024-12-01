@@ -1,64 +1,142 @@
 .search-container {
-    box-sizing: border-box;
-    margin: 20px 0px 15px 0px;
-    background-color: white;
-    border: solid 1px #a5a5a5;
-    box-shadow: 2px 2px 1px 1px #a5a5a5;
-    border-radius: 10px;
-    padding: 20px;
-    min-width: 100%;
+    margin: 0 auto;
+    
+    width: 100%;
+    height: 400px;
+    align-content: center;
+    
+    background-image: url('../../assets/images/backgrounds/background2.jpg');
+    background-size: cover;
+    background-position: center;
 }
 
-.main-search-form {
+.searchbar, .adv-searchbar {
+    display: flex;
+    flex-direction: column;
+    
+    margin: 0 auto;
+    padding: 0;
+    width: 75%;
+    height: fit-content;
+    
+    background-color: white;
+    border-radius: 15px;
+}
+
+.adv-searchbar {
+    margin-top: 47px;
+}
+
+.search-form {
     display: flex;
     flex-direction: row;
+    
+    margin: 0;
     min-width: 100%;
-    font-weight: 500;
+    height: 100%;
+    
     justify-content: space-between;
+    align-items: center;
 }
 
-.additional-options {
-    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
-    overflow: hidden; 
-    max-height: 0; 
-    opacity: 0;
+/* || columns */
+
+.category {
+    display: flex;
+    padding: 0;
+    
+    gap: 10px;
+    align-items: center;
 }
 
-.additional-options.visible {
-    max-height: 1000px;
-    opacity: 1;
+.column1, .column2, .column3 {
+    display: flex;
+    flex-direction: column;
 }
 
-.inputs{
-    display: flex;    
+.column1 {
+    flex: 0 1 26%;
+}
+
+.column2, .column3 {
+    flex: 1 0 30%;
+}
+
+/* || icons */
+
+.location-icon, .price-icon, .area-icon, .district-icon, .rooms-icon, .floor-icon, .search-icon {
+    margin-left: 0px;
+    width: 24px;
+    height: 24px;
+}
+
+.location-icon, .district-icon  {
+    margin-left: 10px;
+}
+
+/* || inputs */
+
+.inputs {
+    display: flex;
     gap: 25px;
 }
 
+form input {
+    margin: 0;
+    height: 60px;
+    
+    border: none;
+    border-radius: 0;
+}
+
+.city-input {
+    flex: 1 0 20%;
+    border-right: 1px solid lightgray;
+}
+
+.area-input1, .area-input2, .level-input1, .level-input2 {
+    flex: 1 1 48%;
+}
+
+.price-input1, .price-input2 {
+    flex: 1 0 35%;
+}
+.price-input2 {
+    border-right: 1px solid lightgray;
+}
+
+/* submit button */
+
 .submit-search {
-    min-width: 200px;
-    padding-top: 40px;
-    margin-left: 20px;
-    margin-right: 20px;
+    font-size: 14px;
+    display: flex;
 
+    margin-left: 0px;
+    margin-right: 15px;
+    width: 135px;
+    height: 40px;
+
+    gap: 20px;
+    align-items: center;
 }
 
-.category-name {
-    padding-bottom: 5px;
+.submit-search img {
+    margin: 0;
+    padding-left: 10px;
+
+    height: 60%;
 }
 
-.category {
-    flex: 1 1 35%;
-}
+/* advanced search options */
 
 .more {
-    text-align: center;
-    margin-top: 10px;
-    font-weight: 500;
-    font-size: 12px;
-    width: fit-content;
     margin: 0 auto;
     padding-top: 10px;
-    margin-top: 10px;
+    width: fit-content;
+
+    text-align: center;
+    font-weight: 500;
+    font-size: 14px;
 }
 
 .more:hover {
@@ -66,25 +144,57 @@
     cursor: pointer;
 }
 
+.additional-options {
+    max-height: 0; 
+
+    transition: max-height 0.8s ease-in-out, opacity 0.8s ease-in-out;
+    overflow: hidden; 
+    opacity: 0;
+}
+
+.additional-options.visible { 
+    display: flex;
+    flex-direction: column;
+
+    max-height: 1000px;
+    opacity: 1;
+}
+
 .options-to-check {
     display: flex;
     flex-direction: row;
-    gap: 45px;
-    flex: 1 0 58%;
-        
+
+    margin: 0 auto;
+    min-width: 100%;
+    justify-content: space-around;
+    gap: 0px;
+    
+    border-top: 1px solid lightgrey;
 }
 
 .options-to-check label {
     font-size: 14px;
+    white-space: nowrap;
 }
 
-.check-input input{
-    width: 25px;
-    margin-top: 20px;
-}
-
-.firstColumn, .secondColumn {
+.check {
     display: flex;
-    flex-direction: column;
-    text-align: right;
+    flex: 1 1 25%;
+
+    max-width: fit-content;
+    gap: 10px;
+    align-items: center;
 }
+
+.check input{
+    max-width: 20px;
+}
+
+.district-input {
+    border-right: 1px solid lightgray;
+}
+
+.rooms-input2 {
+    border-right: 1px solid lightgrey;
+}
+

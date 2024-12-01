@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import SearchForm from "../components/SearchForm";
 import SearchedOffers from "../components/SearchedOffers";
 
-import '../styles/routes/offer-search.css';
+import '../styles/routes/offer-search-page.css';
 
 export default function OfferSearchPage() {
 
@@ -66,9 +66,11 @@ export default function OfferSearchPage() {
     };
 
     return (
-        <div className="offer-page">
-            <SearchForm onSearch={handleSearchResult} initialCriteria={searchCriteria} />
-            <SearchedOffers offers={offers} />
+        <div className="offersearch-main">
+            <div className="offer-page">
+                <SearchForm onSearch={handleSearchResult} initialCriteria={searchCriteria} />
+                <SearchedOffers offers={offers} />
+            </div>
         </div>
     )
 }

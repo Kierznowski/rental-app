@@ -1,0 +1,141 @@
+/* || main style */
+
+*{
+    box-sizing: border-box;
+
+    margin: 0;
+    padding: 0;
+
+    --navyblue: #011435;
+}
+
+body {
+    display: block;
+    
+    margin: 0 auto;
+    width: 100%;
+    height: 100%;
+    
+    font-family: 'Montserrat';
+    background-color: lightgrey;
+    color: #011435;
+}
+
+main {
+    display: flex;
+    flex-grow: 1;
+    
+    margin: 0 auto;
+    max-width: 1440px;
+    width: 100%;
+    
+    background-color: white;
+}
+
+.main-container {
+    display: flex;
+    flex-direction: column;
+    
+    height: 100%;
+}
+
+.errorPage {
+    padding: 100px;
+    
+    text-align: center;
+    color: white;
+}
+
+/* || navigation */
+
+nav {
+    display: flex;
+    
+    margin: 0 auto;
+    padding: 30px;
+    min-height: 120px;
+    min-width: 100%;
+
+    font-size: 45px;
+    font-weight: 600;
+    color: #021e4f;
+    background-color: rgb(255, 255, 255);
+    border-bottom: solid 5px #021e4f;
+}
+
+nav a {
+    text-decoration: none;
+    color: #021e4f;
+}
+
+.navbar {
+    display: flex;
+    
+    margin: 0 auto;
+    min-width: 85%;
+    gap: 300px;
+    justify-content: space-between;
+}
+
+.menu {
+    display: flex;
+    
+    margin: 0 auto;
+    
+    gap: 10px;
+    align-items: center;
+    white-space: nowrap;
+}
+
+.menu-item {
+    font-size: 16px;
+}
+
+.logo a {
+    display: flex;
+}
+
+.sublogo {
+    padding-left: 20px;
+    
+    font-family: 'Edu AU VIC WA NT Guides';
+    font-size: 30px;
+    font-weight: 100;
+}
+
+
+.profile-icon {
+    margin: 0;
+    
+    width: 40px;
+    height: fit-content;
+}
+
+.account-button {
+    display: flex;
+    
+    height: 40px;
+    width: 160px;
+    align-items: center;
+    
+    font-size: 16px;
+    cursor: pointer;
+    border-radius: 8px;
+}
+
+.account-button button {
+    background-color: white;
+}
+
+
+/* || footer */
+
+footer {
+    padding: 10px;
+    
+    height: 35px;
+    
+    font-size: 12px;
+    text-align: center;
+    background-color: #011435;
+}

@@ -15,7 +15,7 @@ export default function ImageSlider( {images}) {
 
     return (
         <div className="slider-container">
-            <button onClick={previousPhoto} className="prev-button">⇐</button>
+            <button onClick={previousPhoto} className="prev-photo-btn">⇐</button>
             {images.length > 0 ?
             <img 
                 key={photoIndex}
@@ -23,7 +23,7 @@ export default function ImageSlider( {images}) {
                 alt={`appartment-photo-${photoIndex}`}   
                 /> 
                 : <p>Brak zdjęć</p>}
-            <button onClick={nextPhoto} className="next-button">⇒</button>
+            <button onClick={nextPhoto} className="next-photo-btn">⇒</button>
             <div className="circle-indicator">
                 {images.map((_, index) => (
                     <span

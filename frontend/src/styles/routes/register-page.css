@@ -1,21 +1,134 @@
+/* Autofill styling for Firefox */
+input:-moz-autofill {
+    background-color: white !important;
+    transition: background-color 5000s ease-in-out 0s; 
+}
+  
+/* Autofill styling for Chrome, Edge (Chromium-based) */
+input:-webkit-autofill {
+    background-color: white !important;
+    transition: background-color 5000s ease-in-out 0s;
+}
+
+.registerpage-title {
+    text-align: center;
+}
+
 .register-container {
     display: flex;
-    flex-direction: column;
+
+    width: 100%;
     margin: 0 auto;
-    margin-top: 20px;
-    margin-bottom: 20px;
-    padding: 30px 50px 50px 50px;
-    font-size: 20px;
-    background-color: #ebd6a2;
-    border: solid 1px #c7b27d;
-    border-radius: 4px;
-    box-shadow: 2px 2px 1px 1px #a5a5a5;
-    width: 85%;
+    background-image: url('../../assets/images/backgrounds/background3.jpg');
+    background-size: 125%;
+    background-position: -350px;
+    background-repeat: no-repeat;
+}
+
+.register-form {
+    display: flex;
+    flex-direction: column;
+   
+    margin: 0 auto;
+    margin-top: 100px;
+    margin-bottom: 80px;
+    margin-left: 340px;
+    padding: 30px 0px 50px 0px;
+    width: 30%;
+    height: 75%;
+    align-items: center;
+    
+    font-size: 16px;
+    border-radius: 10px;
+}
+
+.register-form input {
+    height: 40px;
 }
 
 form {
     display: flex;
     flex-direction: column;
+    
+    margin-bottom: 70px;
+    width: 100%;
     flex: 0 0 35%;
     gap: 10px;
+}
+
+.registerpage-title {
+    text-align: center;
+    font-family: 'Edu AU VIC WA NT Guides';
+    font-size: 30px;
+}
+
+.register-input {
+    background: rgba(255, 255, 255, 0.2);
+    width: 100%;
+}
+
+.register-data-type {
+    margin-top: 10px;
+}
+
+.register-form input:not(:placeholder-shown) {
+    font-weight: 600; 
+    font-size: 12px;
+    color: var(--navyblue);
+}
+
+.register-form button {
+    margin-top: 30px;
+}
+
+/* || photo form */
+
+.register-sec-column {
+    margin-right: 15px;
+    display: flex;
+    flex-direction: column;
+    flex: 0 0 30%;
+    align-items: center;
+    gap: 60px;
+    position: relative;
+    top: 100px;
+    height: fit-content;
+}
+
+.photo-form {
+    width: 300px;
+    height: fit-content;
+}
+
+.profile-photo {
+    width: 100%;
+    opacity: 60%;
+}
+
+.add-photo-icon {
+    position: absolute;
+    top: 125px;
+    left: 195px;
+    width: 50px;
+    height: 50px;
+    cursor: pointer;
+    opacity: 40%;
+}
+
+.register-info {
+    width: 100%;
+    font-size: 18px;
+    font-weight: 500;
+    text-align: center;
+    line-height: 180%;  
+    padding: 0px 10px;
+}
+
+.list-icon {
+    width: 30px;
+}
+
+.features-list {
+    padding-left: 50px;
+    text-align: left;
 }

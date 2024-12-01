@@ -1,15 +1,17 @@
+/* || main container */
 .slider-container {
-    margin: 0 auto;
-    margin-top: 20px;
-    position: relative;
     display: flex;
     flex-direction: row;
-    width: 75%;
-    justify-content: space-between;
-    background-color: white;
-    /* background-color: #fce1ac; */
+    
+    margin: 0 auto;
+    margin-top: 20px;
     height: auto;
     min-height: 600px;
+    width: 75%;
+    position: relative;
+    justify-content: space-between;
+    
+    background-color: white;
     border-radius: 4px;
 }
 
@@ -19,35 +21,71 @@
 }
 
 .slider-container img {
+    display: block;
     width: 100%;
     height: 600px;
+    
     object-fit: contain;
-    display: block;
     background-color: black;
 }
 
-.prev-button, .next-button {
-    font-size: 40px;
-    color: #aa986c;
-    position: absolute;
-    height: 100%;
-    width: 10%;
-    background-color: rgb(165, 165, 165, 0.1);
+/* || container displaying photo */
+
+.photo-display {
+    display: flex;
+    flex-direction: row;
+    
+    margin-top: 20px;
+    height: auto;
+    min-height: 500px;
+    width: 100%;
+    justify-content: space-between;
+    position: relative;
+    
+    background-color: #e6e6e6;
+    border-radius: 4px;
+}
+
+.photo-display img {
+    display: block;
+    
+    width: 100%;
+    height: 600px;
+    
+    object-fit: contain;
+    background-color: black;
 }
 
 .photo-display button:hover {
     background-color: rgb(165, 165, 165, 0.2);
 }
 
-.prev-button {
+.photo-display p {
+    margin: 0 auto;
+    margin-top: 240px;
+}
+
+.prev-photo-btn, .next-photo-btn {
+    width: 10%;
+    height: 100%;
+    position: absolute;
+    
+    font-size: 40px;
+    color: #aa986c;
+    background-color: rgb(165, 165, 165, 0.1);
+}
+
+.prev-photo-btn {
     left: 0px;
     border-radius: 4px 0px 0px 4px;
 }
 
-.next-button {
+.next-photo-btn {
     right: 0px;
     border-radius: 0px 4px 4px 0px;
 }
+
+/* || photo order indicator */
 
 .circle-indicator {
     display: flex;
@@ -58,14 +96,15 @@
 }
 
 .circle {
+    margin: 0 5px;
     height: 15px;
     width: 15px;
+    
     background-color: rgb(128, 128, 128, 0.3);
     border-radius: 50%;
-    margin: 0 5px;
+    border: 2px solid darkgrey;
     cursor: pointer;
     transition: background-color 0.3s;
-    border: 2px solid darkgrey;
 }
 
 .circle.active {

@@ -1,7 +1,7 @@
-import './../styles/components/offer-short.css';
 import { Link } from 'react-router-dom';
 import {useState, useEffect } from 'react';
 
+import './../styles/components/offer-short.css';
 
 export default function OfferShort(props) {
 
@@ -30,17 +30,25 @@ export default function OfferShort(props) {
     }, [props.imageId]);
     
     return (
-        <div className='content'>
         <div className='offer-container'>
-            <Link to={`./../offers/${props.id}`} target='_blank'><img src={imageSrc} alt='appartment' className='offerImage'/></Link>
+            <Link to={`./../offers/${props.id}`} target='_blank'>
+                <img src={imageSrc} alt='appartment' className='offerImage'/>
+            </Link>
             <div className='description'>
                 <div className='title-price'>
-                    <Link to={`./../offers/${props.id}`}><div className="title">{props.title}</div></Link>
-                    <div className="price">{props.price} pln / msc</div>
+                    <Link to={`./../offers/${props.id}`}>
+                        <div className="offer-title">
+                            {props.title}
+                        </div>
+                    </Link>
+                    <div className="price">
+                        {props.price} pln / msc
+                    </div>
                 </div>
-                <div className="info">Powierzchnia: {props.area} m2 | Miasto: {props.city} | Ulica: {props.street}</div>
+                <div className="info">
+                    Powierzchnia: {props.area} m2 | Miasto: {props.city} | Ulica: {props.street}
+                </div>
             </div>
-        </div>
         </div>
     )
 }

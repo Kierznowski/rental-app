@@ -1,6 +1,6 @@
 import { useParams, Link } from 'react-router-dom';
 import React, { useContext } from 'react';
-import './../styles/routes/offer-style.css';
+import './../styles/routes/offer-page.css';
 import ImageSlider from '../components/ImageSlider';
 import { AuthContext } from '../context/AuthContext';
 import defaultProfilePic from '../assets/images/icons/default-profile-pic.png';

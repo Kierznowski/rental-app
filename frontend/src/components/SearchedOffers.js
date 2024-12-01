@@ -1,5 +1,4 @@
 import OfferShort from "./OfferShort";
-import '../styles/components/searched-offers.css';
 
 export default function SearchedOffers({ offers }) {
     const offersList = offers.map(offer => (

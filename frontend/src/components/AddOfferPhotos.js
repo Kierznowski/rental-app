@@ -37,37 +37,36 @@ export default function AddOfferPhotos( {onImagesChange}) {
     }
     
     return (
-            <div className='offer-photos-form'>
+            <div className='addofferphotos-form'>
                 <label>Dodaj zdjęcia:</label>
                 <input 
-                    className='add-photo-button' 
+                    className='add-photo-btn' 
                     type='file' 
                     onChange={handleUploadingPhoto} 
                     multiple     
                 />
                 <div className='photo-display'>
-                    <button onClick={previousPhoto} className="prev-button">⇐</button>
-                    {files.length > 0 ? <>
-                        <img 
-                            key={photoIndex} 
-                            src={URL.createObjectURL(files[photoIndex])} 
-                            alt={`appartment-photo-${photoIndex}`}   
-                        />
-                        <button className='delete-photo' onClick={deletePhoto}>&#x2715;</button>
+                    <button onClick={previousPhoto} className="prev-photo-btn">⇐</button>
+                    {files.length > 0 ? 
+                        <>
+                            <img 
+                                key={photoIndex} 
+                                src={URL.createObjectURL(files[photoIndex])} 
+                                alt={`appartment-photo-${photoIndex}`} />
+                            <button className='delete-photo-btn' onClick={deletePhoto}>&#x2715;</button>
                         </> 
                         : <p>Brak zdjęć</p>}
-                    <button onClick={nextPhoto} className="next-button">⇒</button>
+                    <button onClick={nextPhoto} className="next-photo-btn">⇒</button>
                     <div className="circle-indicator">
-                    {files.map((_, index) => (
-                    <span
-                        key={index}
-                        className={`circle ${index === photoIndex ? 'active' : ''}`}
-                        onClick={() => setPhotoIndex(index)}
-                    />
-                    ))}
-            </div>
+                        {files.map((_, index) => (
+                        <span
+                            key={index}
+                            className={`circle ${index === photoIndex ? 'active' : ''}`}
+                            onClick={() => setPhotoIndex(index)}
+                        />
+                        ))}
+                    </div>
                 </div>
-
             </div>
         )
 }

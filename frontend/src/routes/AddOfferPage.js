@@ -1,8 +1,11 @@
 import React from 'react';
-import './../styles/routes/addOffer-style.css';
+import { useNavigate } from 'react-router-dom';
+
+import '../styles/routes/add-offer-page.css';
+import '../styles/components/image-slider.css';
+
 import AddOfferForm from '../components/AddOfferForm';
 import AddOfferPhotos from '../components/AddOfferPhotos';
-import { useNavigate } from 'react-router-dom';
 
 export default function AddOfferPage() {
 
