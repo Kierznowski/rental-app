@@ -4,6 +4,7 @@ import searchIcon from '../assets/images/icons/search-icon.png';
 import locationIcon from '../assets/images/icons/location-icon.png';
 import priceIcon from '../assets/images/icons/price-icon.png';
 import areaIcon from '../assets/images/icons/area-icon.png';
+import { useNavigate } from 'react-router-dom';
 
 export default function HomeSearchBar() {
 
@@ -13,14 +14,19 @@ export default function HomeSearchBar() {
         maxPrice: "",
         minArea: "",
         maxArea: "",
-
     });
+
+    const navigate = useNavigate();
 
     function handleSubmit(event) {
         event.preventDefault();
-        
-        console.log(searchData);
 
+        const searchParams = new URLSearchParams();
+        Object.entries(searchData).forEach(([key, value]) => {
+            if(value) searchParams.append(key, value);
+        });
+
+        navigate(`/offers?${searchParams.toString()}`);
     }
 
     function handleChange(event) {

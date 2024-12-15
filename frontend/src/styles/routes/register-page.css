@@ -31,7 +31,7 @@ input:-webkit-autofill {
    
     margin: 0 auto;
     margin-top: 100px;
-    margin-bottom: 80px;
+    margin-bottom: 160px;
     margin-left: 340px;
     padding: 30px 0px 50px 0px;
     width: 30%;
@@ -44,6 +44,7 @@ input:-webkit-autofill {
 
 .register-form input {
     height: 40px;
+    border-radius: 8px;
 }
 
 form {
@@ -63,12 +64,12 @@ form {
 }
 
 .register-input {
-    background: rgba(255, 255, 255, 0.2);
     width: 100%;
+    background: rgba(255, 255, 255, 0.2);
 }
 
 .register-data-type {
-    margin-top: 10px;
+    margin-top: 20px;
 }
 
 .register-form input:not(:placeholder-shown) {
@@ -84,15 +85,16 @@ form {
 /* || photo form */
 
 .register-sec-column {
-    margin-right: 15px;
     display: flex;
     flex-direction: column;
     flex: 0 0 30%;
-    align-items: center;
-    gap: 60px;
+    
+    margin-right: 15px;
+    height: fit-content;
     position: relative;
     top: 100px;
-    height: fit-content;
+    gap: 60px;
+    align-items: center;
 }
 
 .photo-form {
@@ -102,33 +104,64 @@ form {
 
 .profile-photo {
     width: 100%;
-    opacity: 60%;
-}
-
-.add-photo-icon {
-    position: absolute;
-    top: 125px;
-    left: 195px;
-    width: 50px;
-    height: 50px;
-    cursor: pointer;
     opacity: 40%;
 }
 
-.register-info {
+.photo-frame-content {
+    position: absolute;
+    top: 80px;
+    left: 155px;
+    width: 120px;
+    height: 140px; 
+    overflow: hidden;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+
+.photo-frame-content img {
     width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+    border-radius: 3px;
+}
+
+.photo-frame-icon {
+    padding: 30px;
+    opacity: 40%;
+}
+
+.add-profile-photo-input {
+    display: none;
+}
+
+.register-info {
+    padding: 0px 10px;
+    width: 100%;
+    
     font-size: 18px;
     font-weight: 500;
     text-align: center;
     line-height: 180%;  
-    padding: 0px 10px;
 }
 
 .list-icon {
     width: 30px;
 }
 
-.features-list {
+.register-info-features-list {
+    display: flex;
+    flex-direction: column;
+    
     padding-left: 50px;
+    gap: 10px;
+    
     text-align: left;
+}
+
+.register-info-feature {
+    display: flex;
+    gap: 15px;
 }

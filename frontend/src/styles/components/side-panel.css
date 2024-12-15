@@ -68,3 +68,51 @@
     height: 50px;
 }
 
+/* || logged in content */
+
+.logged-sidepanel {
+    display: flex;
+    flex-direction: column;
+
+    margin: 0 auto;
+    align-items: center;
+    gap: 20px;
+}
+
+.sidePanel-profile-photo {
+    display: flex;
+
+    height: 100px;
+    width: 100px;
+    
+    border: 3px solid var(--navyblue);
+    border-radius: 50%;
+}
+
+.user-name {
+    margin-bottom: 30px;
+
+    text-align: center;
+    font-weight: 600;
+}
+
+.sidePanel-menu {
+    display: flex;
+    flex-direction: column;
+
+    gap: 20px;
+}
+
+.sidePanel-menu-option {
+    padding: 10px 40px;
+
+    border-top: lightgray 1px solid;
+    border-bottom: lightgray 1px solid;
+}
+
+.sidePanel-menu-option:hover {
+    transition: 0.4s ease;
+    background-color: rgb(238, 238, 238);
+    cursor: pointer;
+}
+

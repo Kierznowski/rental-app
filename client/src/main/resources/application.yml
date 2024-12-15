@@ -22,6 +22,7 @@ authorization-server:
   url:
     base: http://localhost:9000
     register-user: ${authorization-server.url.base}/account
+    basic-user-info: ${authorization-server.url.base}/user-basic-info
 spring:
   security:
     oauth2:

@@ -8,14 +8,14 @@ import addOfferIcon from '../assets/images/icons/add-offer-icon.png';
 import phoneIcon from '../assets/images/icons/phone-icon.png';
 import searchOffersIcon from '../assets/images/icons/search-offers-icon.png';
 
-import React from "react";
+import React, { useRef, useState } from "react";
 
 
 export default function RegisterPage() {
 
     const navigate = useNavigate();
 
-    const [formData, setFormData] = React.useState({
+    const [formData, setFormData] = useState({
         email: "",
         password: "",
         firstName: "",
@@ -24,10 +24,27 @@ export default function RegisterPage() {
         userCity: "",
         userStreet: "",
         userZip: "",
-    })
+    });
+
+    const [profilePhoto, setProfilePhoto] = useState(null);
+    const fileInputRef = useRef(null);
+
+    const handleClickFrameContent = () => {
+        if(fileInputRef.current) {
+            fileInputRef.current.click();
+        }
+    };
 
     function isValid() {
         return true;
+    }
+
+    function handlePhotoChange(e) {
+        const file = e.target.files[0];
+        if(file) {
+            const fileURL = URL.createObjectURL(file);
+            setProfilePhoto(fileURL);
+        }
     }
 
 
@@ -165,19 +182,58 @@ export default function RegisterPage() {
             </div>
             <div className='register-sec-column'>
                 <div className='photo-form'>
-                    <img src={photoFrame} alt='photo-frame' className='profile-photo'/>
-                    <img src={addPhotoIcon} alt='add-photo-icon' className='add-photo-icon'/>
+                    <input 
+                        className='add-profile-photo-input' 
+                        type='file' 
+                        onChange={handlePhotoChange} 
+                        ref={fileInputRef}
+                    />
+                    <img 
+                        src={photoFrame} 
+                        alt='photo-frame' 
+                        className='profile-photo' 
+                    />
+                    <div className='photo-frame-content' onClick={handleClickFrameContent}>
+                        {profilePhoto ? (
+                            <img 
+                                src={profilePhoto}
+                                alt="uploaded-profile-photo"
+                                onClick={handleClickFrameContent}
+                            />     
+                        ) : (
+                            <img 
+                                src={addPhotoIcon}
+                                alt='add-photo-icon' 
+                                className='photo-frame-icon'
+                                onClick={handleClickFrameContent}
+                            />
+                        )}
+                    </div>
                 </div>
                 <div className='register-info'>
-                Nie masz jeszcze konta w naszym serwisie? <br/> Założysz je w mgnieniu oka, w kilku krokach!<br/>
-                    Wystarczy, że wypełnisz formularz. <br/>Nie zapomnij wstawić zdjęcia w ramkę!
+                    Nie masz jeszcze konta w naszym serwisie? <br/>  
+                    Założysz je w mgnieniu oka, w kilku krokach!<br/>
+                    Wystarczy, że wypełnisz formularz. <br/>
+                    Nie zapomnij wstawić zdjęcia w ramkę!
                     <br/>
                     <br/>
-                    <div className='features-list'>
-                        <img src={searchOffersIcon} alt='search-offers-icon' className='list-icon'/> wyszukuj atrakcyjne oferty <br />
-                        <img src={addOfferIcon} alt='add-offer-icon' className='list-icon'/> zamieszczaj ogłoszenia <br />
-                        <img src={addToFavoriteIcon} alt='add-to-favortie-icon' className='list-icon'/> dodawaj w ulubionych <br />
-                        <img src={phoneIcon} alt='phone-icon' className='list-icon'/> kontaktuj się z zaintersowanymi <br />
+                    <div className='register-info-features-list'>
+                        <div className='register-info-feature'>   
+                            <img src={searchOffersIcon} alt='search-offers-icon' className='list-icon'/> 
+                                wyszukuj atrakcyjne oferty <br />
+                        </div>
+                        <div className='register-info-feature'>   
+                            <img src={addOfferIcon} alt='add-offer-icon' className='list-icon'/> 
+                                zamieszczaj ogłoszenia <br />
+                        </div>
+                        <div className='register-info-feature'>   
+                            <img src={addToFavoriteIcon} alt='add-to-favortie-icon' className='list-icon'/> 
+                                dodawaj w ulubionych <br />
+                        </div>
+                        <div className='register-info-feature'>
+                            <img src={phoneIcon} alt='phone-icon' className='list-icon'/> 
+                                kontaktuj się z zainteresowanymi <br />
+                        </div>
                     </div>
                 </div>
             </div>
