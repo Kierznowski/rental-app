@@ -1,7 +1,11 @@
 package com.kierznowski.rentalApp.models;
 
 import jakarta.persistence.*;
+import jakarta.validation.constraints.DecimalMin;
+import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.RequiredArgsConstructor;
 
 import java.io.Serializable;
@@ -13,6 +17,7 @@ import java.util.List;
 @Entity
 @Data
 @Table(name="Offer_data")
+@EqualsAndHashCode(exclude = "user")
 @RequiredArgsConstructor
 public class Offer implements Serializable {
 
@@ -21,21 +26,44 @@ public class Offer implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    @ManyToOne
+
+    @ManyToOne(optional = false, cascade = CascadeType.PERSIST)
     private User user;
-    private Date createdAt = new Date();
+
+    @Temporal(TemporalType.TIMESTAMP)
+    private Date createdAt;
+
+    @NotNull
     private String offerName;
+
+    @NotNull
     private String city;
     private String district;
     private String street;
     private String zip;
+
+    @Min(1800)
     private int buildingYear;
+
+    @NotNull
+    @DecimalMin("0.0")
     private BigDecimal fullPrice;
+
+    @DecimalMin("0.0")
     private BigDecimal basePrice;
+
+    @DecimalMin("0.0")
     private BigDecimal additionalPrice;
+
+    @Min(0)
     private int area;
+
+    @Min(1)
     private int roomsNumber;
+
+    @Min(0)
     private int estateLevel;
+
     private boolean garage;
     private boolean annexKitchen;
     private boolean elevator;
@@ -48,4 +76,9 @@ public class Offer implements Serializable {
     )
     @Column(name = "image_id")
     private List<Long> imageIds = new ArrayList<>();
+
+    @PrePersist
+    protected void onCreate() {
+        this.createdAt = new Date();
+    }
 }

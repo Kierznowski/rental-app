@@ -1,20 +1,19 @@
 package com.kierznowski.rentalApp.models;
 
 import jakarta.persistence.*;
-import lombok.AccessLevel;
 import lombok.Data;
+import lombok.EqualsAndHashCode;
 import lombok.NoArgsConstructor;
 import lombok.RequiredArgsConstructor;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.Collection;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity(name="User_data")
 @Data
-@NoArgsConstructor(access = AccessLevel.PRIVATE, force = true)
+@EqualsAndHashCode(exclude = "offerList")
 @RequiredArgsConstructor
+@NoArgsConstructor(force = true)
 public class User {
 
     private static final long serialVersionUID = 1L;
@@ -25,19 +24,20 @@ public class User {
 
     private final String email;
     private String firstName;
-    private String lastName;
+    private String secondName;
     private String phone;
     private String userCity;
     private String userStreet;
     private String userZip;
-    @OneToMany
-    private List<Offer> offerList;
 
-    public User(String email, String firstName, String lastName,
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<Offer> offerList = new HashSet<>();
+
+    public User(String email, String firstName, String secondName,
                 String phone, String userCity, String userStreet, String userZip) {
         this.email = email;
         this.firstName = firstName;
-        this.lastName = lastName;
+        this.secondName = secondName;
         this.phone = phone;
         this.userCity = userCity;
         this.userStreet = userStreet;

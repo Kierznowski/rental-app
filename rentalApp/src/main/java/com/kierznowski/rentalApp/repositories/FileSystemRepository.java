@@ -22,10 +22,10 @@ public class FileSystemRepository {
     }
 
     public FileSystemResource findInFileSystem(String location) {
-        try {
-            return new FileSystemResource(Paths.get(location));
-        } catch (Exception e) {
-            throw new RuntimeException();
+        Path path = Paths.get(location);
+        if(!Files.exists(path)) {
+            throw new RuntimeException("File not found: " + location);
         }
+        return new FileSystemResource(path);
     }
 }

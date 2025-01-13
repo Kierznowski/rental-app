@@ -23,8 +23,8 @@ public class AccountController {
         if(!patch.getFirstName().equals("")) {
             user.setFirstName(patch.getFirstName());
         }
-        if(!patch.getLastName().equals("")) {
-            user.setLastName(patch.getLastName());
+        if(!patch.getSecondName().equals("")) {
+            user.setSecondName(patch.getSecondName());
         }
         if(!patch.getPhone().equals("")) {
             user.setPhone(patch.getPhone());

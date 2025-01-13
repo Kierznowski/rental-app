@@ -1,13 +1,12 @@
 package com.kierznowski.rentalApp.controllers;
 
 import com.kierznowski.rentalApp.models.Offer;
-import com.kierznowski.rentalApp.utils.APIResponse;
 import com.kierznowski.rentalApp.searching.OfferSearchDTO;
 import com.kierznowski.rentalApp.searching.OfferSpecificationBuilder;
 import com.kierznowski.rentalApp.searching.SearchCriteria;
 import com.kierznowski.rentalApp.services.OfferService;
+import com.kierznowski.rentalApp.utils.APIResponse;
 import lombok.AllArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;

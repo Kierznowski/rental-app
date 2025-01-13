@@ -22,9 +22,10 @@ public class RentalAppApplication {
 		SpringApplication.run(RentalAppApplication.class, args);
 	}
 
-	@Bean
+	/*@Bean
 	public CommandLineRunner dataLoader(UserRepository userRepository, OfferRepository offerRepository,
 										PasswordEncoder passwordEncoder, FileLocationService fileLocationService) {
+
 		return new CommandLineRunner() {
 			@Override
 			public void run(String... args) throws Exception {
@@ -143,5 +144,5 @@ public class RentalAppApplication {
 
 		};
 
-	}
+	}*/
 }
